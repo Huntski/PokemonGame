@@ -1,0 +1,14 @@
+.tackle {
+    animation: tackle 300ms ease;
+}
+
+@keyframes tackle {
+    80% {
+        transform: translateX(-10%);
+    }
+
+    100% {
+        transform: translateX(20%);
+    }
+
+}
