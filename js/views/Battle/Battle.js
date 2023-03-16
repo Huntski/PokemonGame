@@ -8,6 +8,7 @@ import {
     showPlayerCharacter
 } from "./Characters.js"
 import {showMessageMenu} from "./Menu/MessageMenu.js"
+import {showStartMenu} from "./Menu/StartMenu.js"
 
 export let battleMenu = null
 export let playerStatus = null
@@ -17,14 +18,14 @@ export function startBattle() {
     resetCanvas()
     playBattleMusic()
     sleep(300).then(() => {
-        CreateBattleInterface(player.pokemon[0], opponent.pokemon[0])
+        CreateBattleInterface()
     })
 }
 
 export let playerContainer = null
 export let opponentContainer = null
 
-function CreateBattleInterface(playerPokemon, opponentPokemon) {
+function CreateBattleInterface() {
     const battleElement = document.createElement('div')
 
     battleElement.innerHTML = `
@@ -37,19 +38,7 @@ function CreateBattleInterface(playerPokemon, opponentPokemon) {
         <div class="battle-ui">
             <div class="status status--opponent"></div> 
 
-            <div class="status status--player">
-                <div class="status__name">
-                    <h2>${playerPokemon.name}</h2>
-                    <span>lvl ${playerPokemon.level}</span>
-                </div>
-
-                <div class="status__health">
-                    <span>HP:</span>
-                    <div class="health-bar">
-                        <div class="current-health player-health"></div>
-                    </div>
-                </div>
-            </div>
+            <div class="status status--player"></div>
  
             <div class="battle-menu"></div>
         </div>`
@@ -63,8 +52,6 @@ function CreateBattleInterface(playerPokemon, opponentPokemon) {
 
     playerContainer = gameCanvas.querySelector('.player-container')
     opponentContainer = gameCanvas.querySelector('.opponent-container')
-
-    // updatePokemonHealth()
 
     startBattleSequence()
 }

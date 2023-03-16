@@ -20,13 +20,14 @@ export function playBattleMusic() {
 }
 
 export function playPokemonLowMusic() {
-    stopMusic()
-
     if (music['lowMusic'] === undefined) {
         music['lowMusic'] = createSoundElement("sounds/black&white_low-music.mp3")
     }
 
-    music['lowMusic'].play()
+    if (music['lowMusic'].paused) {
+        stopMusic()
+        music['lowMusic'].play()
+    }
 }
 
 export function menuSoundEffect() {

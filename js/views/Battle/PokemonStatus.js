@@ -1,24 +1,55 @@
 import {currentOpponentPokemon, currentPlayerPokemon} from "./Characters.js"
+import {opponentStatus, playerStatus} from "./Battle.js"
+
+export let playerHealthBar = null
+export let opponentHealthBar = null
+
+export function showPlayerPokemonStatus() {
+    playerStatus.innerHTML = `
+        <div class="status__name">
+            <h2>${currentPlayerPokemon.name}</h2>
+            <span>lvl ${currentPlayerPokemon.level}</span>
+        </div>
+
+        <div class="status__health">
+            <span>HP:</span>
+            <div class="health-bar">
+                <div class="current-health player-health"></div>
+            </div>
+        </div>`
+
+    playerHealthBar = playerStatus.querySelector('.current-health')
+
+    playerHealthBar.style.width = `${currentPlayerPokemon.healthPercentage}%`
+
+    changeHealthBarColor(playerHealthBar, currentPlayerPokemon.healthPercentage)
+
+    playerStatus.style.display = 'block'
+}
 
 export function showOpponentPokemonStatus() {
-    const template = `
-            <div class="status__name">
-                    <h2>${currentOpponentPokemon.name}</h2>
-                    <span>lvl ${currentOpponentPokemon.level}</span>
-                </div>
+    opponentStatus.innerHTML = `
+        <div class="status__name">
+                <h2>${currentOpponentPokemon.name}</h2>
+                <span>lvl ${currentOpponentPokemon.level}</span>
+            </div>
 
-                <div class="status__health">
-                    <span>HP:</span>
-                    <div class="health-bar">
-                        <div class="current-health opponent-health"></div>
-                    </div>
-            </div>`
+            <div class="status__health">
+                <span>HP:</span>
+                <div class="health-bar">
+                    <div class="current-health opponent-health"></div>
+                </div>
+        </div>`
+
+    opponentHealthBar = opponentStatus.querySelector('.current-health')
+
+    opponentHealthBar.style.width = `${currentOpponentPokemon.healthPercentage}%`
+    changeHealthBarColor(opponentHealthBar, currentOpponentPokemon.healthPercentage)
+
+    opponentStatus.style.display = 'block'
 }
 
 export function updatePokemonHealth() {
-    const playerHealthBar = document.querySelector('.player-health')
-    const opponentHealthBar = document.querySelector('.opponent-health')
-
     const currentPlayerHealth = calculateHealthPercentage(currentPlayerPokemon.health, currentPlayerPokemon.currentHealth)
     const currentOpponentHealth = calculateHealthPercentage(currentOpponentPokemon.health, currentOpponentPokemon.currentHealth)
 
@@ -30,6 +61,8 @@ export function updatePokemonHealth() {
 }
 
 function changeHealthBarColor(healthBar, percentage) {
+    console.log(healthBar)
+
     if (percentage < 20) {
         healthBar.style.backgroundColor = 'red'
     } else if (percentage < 50) {

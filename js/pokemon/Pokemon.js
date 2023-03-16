@@ -33,6 +33,16 @@ export class Pokemon {
         return this.health < 0
     }
 
+    get healthPercentage() {
+        const percentage = (100 / this.health) * this.currentHealth
+
+        if (percentage < 0) {
+            return 0
+        }
+
+        return percentage
+    }
+
     takeDamage(amount) {
         this.damageTaken += amount
     }

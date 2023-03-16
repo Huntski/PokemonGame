@@ -1,14 +1,14 @@
-import {
-    currentOpponentPokemon,
-    currentOpponentPokemonElement,
-    currentPlayerPokemon,
-    currentPlayerPokemonElement
-} from "./Battle.js"
 import {playPokemonLowMusic, takeDamageSoundEffect} from "../../music.js"
 import {showStartMenu} from "./Menu/StartMenu.js"
 import {showMessageMenu} from "./Menu/MessageMenu.js"
 import {updatePokemonHealth} from "./PokemonStatus.js"
 import {sleep} from "../../script.js"
+import {
+    currentOpponentPokemon,
+    currentOpponentPokemonElement,
+    currentPlayerPokemon,
+    currentPlayerPokemonElement
+} from "./Characters.js"
 
 export async function playerUseAbility(ability) {
     await showMessageMenu(`${currentPlayerPokemon.name} uses ${ability.name}!`)

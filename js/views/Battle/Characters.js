@@ -1,6 +1,7 @@
 import {opponentContainer, playerContainer} from "./Battle.js"
 import {opponent, player, sleep} from "../../script.js"
 import {showMessageMenu} from "./Menu/MessageMenu.js"
+import {showOpponentPokemonStatus, showPlayerPokemonStatus} from "./PokemonStatus.js"
 
 export let currentPlayerPokemon = null
 export let currentPlayerPokemonElement = null
@@ -62,7 +63,6 @@ export async function loadInPlayerPokemon(pokemon) {
     currentPlayerPokemon = pokemon
 
     const pokemonElement = document.createElement('img')
-    pokemonElement.id = 'player-pokemon'
     pokemonElement.src = pokemon.characterFromBack
     pokemonElement.classList.add('animate-pokemon-join')
 
@@ -70,6 +70,10 @@ export async function loadInPlayerPokemon(pokemon) {
 
     currentPlayerPokemonElement = pokemonElement
     currentPlayerPokemon = pokemon
+
+    await sleep(500)
+
+    showPlayerPokemonStatus()
 
     await sleep(500)
 }
@@ -82,7 +86,6 @@ export async function loadInOpponentPokemon(pokemon) {
     currentOpponentPokemon = pokemon
 
     const pokemonElement = document.createElement('img')
-    pokemonElement.id = 'opponent-pokemon'
     pokemonElement.src = pokemon.characterFromFront
     pokemonElement.classList.add('animate-pokemon-join')
 
@@ -90,6 +93,10 @@ export async function loadInOpponentPokemon(pokemon) {
 
     currentOpponentPokemonElement = pokemonElement
     currentOpponentPokemon = pokemon
+
+    await sleep(500)
+
+    showOpponentPokemonStatus()
 
     await sleep(500)
 }

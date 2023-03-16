@@ -101,13 +101,15 @@ button {
     z-index: 20;
     padding: 5px;
     gap: 5px;
-    box-sizing: border-box;
     display: flex;
     flex-direction: column;
+    justify-content: flex-end;
+    box-sizing: border-box;
     color: white;
 }
 
 .status {
+    display: none;
     position: relative;
     color: white;
     background-color: #252525;
@@ -115,6 +117,7 @@ button {
     border-radius: 5px;
     align-self: flex-start;
     width: 40%;
+    animation: fadeIn 300ms;
 }
 
 .status:before {
@@ -175,9 +178,12 @@ button {
     transition: width 300ms ease;
 }
 
+.status--opponent {
+    margin-bottom: auto;
+}
+
 .status--player {
     align-self: flex-end;
-    margin-top: auto;
 }
 
 /**
@@ -253,7 +259,7 @@ button {
 }
 
 .animate-pokemon-join {
-    animation: pokemonJoinIn 500ms ease-out;
+    animation: pokemonJoinIn 200ms ease-out;
 }
 
 @keyframes pokemonJoinIn {
