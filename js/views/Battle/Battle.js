@@ -3,13 +3,12 @@ import {playBattleMusic} from "../../music.js"
 import {
     hideOpponentCharacter,
     hidePlayerCharacter,
-    loadInOpponentPokemon,
-    loadInPlayerPokemon,
     showOpponentCharacter,
     showPlayerCharacter
-} from "./Characters.js"
+} from "./CharacterEvents.js"
 import {showStartMenu} from "./Menu/StartMenu.js"
 import {showMessageMenu} from "./Menu/MessageMenu.js"
+import {loadInOpponentPokemon, loadInPlayerPokemon} from "./PokemonEvents.js"
 
 export let battleMenu = null
 export let playerStatus = null
@@ -66,7 +65,6 @@ async function startBattleSequence() {
     await loadInOpponentPokemon(opponent.pokemon[0])
     await hidePlayerCharacter()
     await loadInPlayerPokemon(player.pokemon[0])
-
     showStartMenu()
     createKeyboardEvents()
 }

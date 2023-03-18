@@ -1,14 +1,15 @@
 import {Player} from "./Player.js"
 import {opponent, sleep} from "../script.js"
 import {showMessageMenu} from "../views/Battle/Menu/MessageMenu.js"
-import {loadInOpponentPokemon} from "../views/Battle/Characters.js"
+
 import {playerTurn} from "../views/Battle/TrainerTurns.js"
+import {loadInOpponentPokemon} from "../views/Battle/PokemonEvents.js"
 
 export class Opponent extends Player {
     type = 'Trainer'
 
     pickRandomPokemon() {
-        const notDefeatedPokemon = this.pokemon.filter(pokemon => !pokemon.isTakenDown)
+        const notDefeatedPokemon = this.pokemon.filter(pokemon => !pokemon.fainted)
         return notDefeatedPokemon[Math.floor(Math.random() * notDefeatedPokemon.length)]
     }
 

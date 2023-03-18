@@ -1,6 +1,6 @@
-import {playerUseMove} from "../AttackEvents.js"
-import {currentPlayerPokemon} from "../Characters.js"
+import {playerUseMove} from "../BattleEvents.js"
 import {setBattleMenuContent} from "./BattleMenu.js"
+import {currentPlayerPokemon} from "../PokemonEvents.js"
 
 export let fightMenu = null
 let abilityStatusElement = null

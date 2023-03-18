@@ -42,7 +42,7 @@ export class Pokemon {
         return this.health - this.damageTaken
     }
 
-    get isTakenDown() {
+    get fainted() {
         return this.currentHealth <= 0
     }
 

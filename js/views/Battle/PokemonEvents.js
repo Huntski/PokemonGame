@@ -1,55 +1,10 @@
 import {opponentContainer, playerContainer} from "./Battle.js"
-import {opponent, player, sleep} from "../../script.js"
 import {showMessageMenu} from "./Menu/MessageMenu.js"
+import {opponent, sleep} from "../../script.js"
 import {showOpponentPokemonStatus, showPlayerPokemonStatus} from "./StatusCard/PokemonStatus.js"
 
 export let currentPlayerPokemon = null
 export let currentOpponentPokemon = null
-
-export let playerElement = null
-export let opponentElement = null
-
-export function showPlayerCharacter() {
-    const element = document.createElement('img')
-    element.src = player.imageSrc
-    element.classList.add('character')
-
-    playerContainer.append(element)
-
-    playerElement = element
-}
-
-export async function hidePlayerCharacter() {
-    return playerElement.animate([
-        {transform: 'translateX(0)', opacity: 1},
-        {transform: 'translateX(-100px)', opacity: 0}
-    ], {
-        duration: 300,
-        easing: 'ease-in',
-        fill: "forwards"
-    }).finished
-}
-
-export function showOpponentCharacter() {
-    const element = document.createElement('img')
-    element.src = opponent.imageSrc
-    element.classList.add('character')
-
-    opponentContainer.append(element)
-
-    opponentElement = element
-}
-
-export async function hideOpponentCharacter() {
-    return opponentElement.animate([
-        {transform: 'translateX(0)', opacity: 1},
-        {transform: 'translateX(100px)', opacity: 0}
-    ], {
-        duration: 300,
-        easing: 'ease-in',
-        fill: "forwards"
-    }).finished
-}
 
 export async function loadInPlayerPokemon(pokemon) {
     playerContainer.innerHTML = ''
@@ -95,6 +50,18 @@ export async function loadInOpponentPokemon(pokemon) {
     await sleep(1000)
 
     showOpponentPokemonStatus()
+
+    await sleep(1000)
+}
+
+export async function getPokemonBack(pokemon) {
+    pokemon.element.animate([
+        {opacity: 1},
+        {opacity: 0}
+    ], {
+        duration: 500,
+        fill: 'forwards'
+    }).finished
 
     await sleep(1000)
 }

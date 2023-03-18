@@ -1,5 +1,7 @@
 import {gameCanvas, player} from "../../../script.js"
 import {changeHealthBarColor} from "../StatusCard/PokemonStatus.js"
+import {playerChangePokemon} from "../BattleEvents.js"
+import {opponentTurn} from "../TrainerTurns.js"
 
 let pokemonSelectMenu = null
 
@@ -36,6 +38,11 @@ function closePokemonSelectMenu() {
 function createPokemonOption(pokemon) {
     const option = document.createElement('div')
     option.classList.add('pokemon-option')
+
+    if (pokemon.fainted) {
+        option.classList.add('fainted')
+    }
+
     option.innerHTML = `
         <div class="pokemon-option__image">
             <img src="${pokemon.characterFromFront}" alt="Small image of ${pokemon.name}.">   
@@ -59,7 +66,14 @@ function createPokemonOption(pokemon) {
 
     const healthBar = option.querySelector('.current-health')
 
-    changeHealthBarColor(healthBar, pokemon.currentHealth)
+    healthBar.style.width = `${pokemon.healthPercentage}%`
+
+    changeHealthBarColor(healthBar, pokemon.healthPercentage)
+
+    option.onclick = () => {
+        closePokemonSelectMenu()
+        playerChangePokemon(pokemon).then(_ => opponentTurn())
+    }
 
     return option
 }

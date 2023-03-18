@@ -1,6 +1,6 @@
-import {currentOpponentPokemon, currentPlayerPokemon} from "../Characters.js"
 import {opponentStatus, playerStatus} from "../Battle.js"
 import {sleep} from "../../../script.js"
+import {currentOpponentPokemon, currentPlayerPokemon} from "../PokemonEvents.js"
 
 export let playerHealthBar = null
 export let opponentHealthBar = null

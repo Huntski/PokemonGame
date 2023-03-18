@@ -1,9 +1,9 @@
-import {currentOpponentPokemon, currentPlayerPokemon} from "./Characters.js"
 import {showStartMenu} from "./Menu/StartMenu.js"
-import {opponentUseMove} from "./AttackEvents.js"
+import {opponentUseMove} from "./BattleEvents.js"
 import {playPokemonLowMusic} from "../../music.js"
 import {opponent} from "../../script.js"
 import {showMessageMenu} from "./Menu/MessageMenu.js"
+import {currentOpponentPokemon, currentPlayerPokemon} from "./PokemonEvents.js"
 
 export async function opponentTurn() {
     console.log(currentOpponentPokemon.currentHealth)
@@ -19,7 +19,7 @@ export function playerTurn() {
 }
 
 export async function checkPlayerPokemonHealth() {
-    if (currentPlayerPokemon.isTakenDown) {
+    if (currentPlayerPokemon.fainted) {
         await currentPlayerPokemon.animateTakeDown()
     } else if (currentPlayerPokemon.currentHealth < 20) {
         playPokemonLowMusic()
@@ -29,7 +29,7 @@ export async function checkPlayerPokemonHealth() {
 }
 
 export async function checkOpponentPokemonHealth() {
-    if (currentOpponentPokemon.isTakenDown) {
+    if (currentOpponentPokemon.fainted) {
         await currentOpponentPokemon.animateTakeDown()
         await showMessageMenu(`${opponent.nickname}'s ${currentOpponentPokemon.name} fainted!`)
         await opponent.throwInNewPokemon()

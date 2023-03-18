@@ -35,7 +35,6 @@
     cursor: pointer;
     border: solid 2px #313131;
 }
-
 .pokemon-option:hover {
     border-color: yellow;
     background-image: linear-gradient(to bottom, #1b77a9, #145a80);
@@ -57,13 +56,11 @@
     border: solid 1px black;
     border-radius: inherit;
 }
-
 .pokemon-option__image img {
     width: 80%;
     height: 80%;
     object-fit: contain;
 }
-
 .pokemon-option__image:after {
     content: "";
     position: absolute;
@@ -74,6 +71,7 @@
     box-shadow: 0 0 2px black inset;
     border-radius: inherit;
 }
+
 .pokemon-option__name {
     display: flex;
     align-items: center;
@@ -81,18 +79,15 @@
     margin-right: auto;
     width: 100%;
 }
-
 .pokemon-option__health {
     display: flex;
     align-items: center;
     gap: 10px;
     width: 100%;
 }
-
 .pokemon-option__health span {
     color: #FCFF5E;
 }
-
 .health-indicator {
     font-size: .9em;
     background-color: black;
@@ -101,7 +96,6 @@
     font-weight: bold;
     margin-left: auto;
 }
-
 .pokemon-select-menu__footer {
     align-self: end;
     display: flex;
@@ -109,7 +103,6 @@
     align-items: center;
     padding-top: 5px;
 }
-
 .pokemon-select-menu__footer button {
     color: white;
     font-size: 1em;
@@ -119,5 +112,20 @@
 }
 .pokemon-select-menu__footer button:hover,
 .pokemon-select-menu__footer button:focus {
+    background: #ea3f33;
+}
 
+/**
+    For when pokemon has a status of fainted.
+ */
+
+.pokemon-option.fainted {
+    background-image: linear-gradient(to bottom, #555859, #3f4142);
+    color: #e8e8e8;
+}
+.pokemon-option.fainted .pokemon-option__image {
+    background-image: linear-gradient(to bottom right, #353636, #1b1c1c);
+}
+.pokemon-option.fainted img {
+    filter: grayscale(100%);
 }
