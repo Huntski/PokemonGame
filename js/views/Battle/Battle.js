@@ -3,16 +3,18 @@ import {playBattleMusic} from "../../music.js"
 import {
     hideOpponentCharacter,
     hidePlayerCharacter,
-    loadInOpponentPokemon, loadInPlayerPokemon,
+    loadInOpponentPokemon,
+    loadInPlayerPokemon,
     showOpponentCharacter,
     showPlayerCharacter
 } from "./Characters.js"
-import {showMessageMenu} from "./Menu/MessageMenu.js"
 import {showStartMenu} from "./Menu/StartMenu.js"
+import {showMessageMenu} from "./Menu/MessageMenu.js"
 
 export let battleMenu = null
 export let playerStatus = null
 export let opponentStatus = null
+export let battleCanvas = null
 
 export function startBattle() {
     resetCanvas()
@@ -26,9 +28,9 @@ export let playerContainer = null
 export let opponentContainer = null
 
 function CreateBattleInterface() {
-    const battleElement = document.createElement('div')
+    const battleCanvasElement = document.createElement('div')
 
-    battleElement.innerHTML = `
+    battleCanvasElement.innerHTML = `
         <div class="pokemon-container">
             <div class="opponent-container animate-slide-left"></div>
         
@@ -43,13 +45,12 @@ function CreateBattleInterface() {
             <div class="battle-menu"></div>
         </div>`
 
-    gameCanvas.appendChild(battleElement)
+    gameCanvas.appendChild(battleCanvasElement)
 
+    battleCanvas = battleCanvasElement
     battleMenu = gameCanvas.querySelector('.battle-menu')
-
     playerStatus = gameCanvas.querySelector('.status--player')
     opponentStatus = gameCanvas.querySelector('.status--opponent')
-
     playerContainer = gameCanvas.querySelector('.player-container')
     opponentContainer = gameCanvas.querySelector('.opponent-container')
 
@@ -65,8 +66,16 @@ async function startBattleSequence() {
     await loadInOpponentPokemon(opponent.pokemon[0])
     await hidePlayerCharacter()
     await loadInPlayerPokemon(player.pokemon[0])
+
     showStartMenu()
+    createKeyboardEvents()
 }
 
-
-
+function createKeyboardEvents() {
+    document.addEventListener('keydown', e => {
+        console.log(e.key)
+        if (e.key === 'Escape') {
+            showStartMenu()
+        }
+    })
+}

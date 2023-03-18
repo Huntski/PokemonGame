@@ -1,4 +1,4 @@
-let defaultVolume = 0
+let defaultVolume = 0.5
 const sounds = {}
 const music = {}
 
@@ -16,6 +16,7 @@ export function playBattleMusic() {
         music['battleMusic'] = createSoundElement("sounds/black&white_trainer-music.mp3")
     }
 
+    music['battleMusic'].setAttribute("loop", '')
     music['battleMusic'].play()
 }
 
@@ -26,6 +27,7 @@ export function playPokemonLowMusic() {
 
     if (music['lowMusic'].paused) {
         stopMusic()
+        music['lowMusic'].setAttribute("loop", '')
         music['lowMusic'].play()
     }
 }
@@ -44,6 +46,16 @@ export function takeDamageSoundEffect() {
     }
 
     sounds['takeDamage'].play()
+}
+
+export function pokemonCry(src) {
+    if (sounds['cry'] === undefined) {
+        sounds['cry'] = createSoundElement(src)
+    } else {
+        sounds['cry'].src = src
+    }
+
+    sounds['cry'].play()
 }
 
 /**

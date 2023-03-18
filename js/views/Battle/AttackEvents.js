@@ -1,80 +1,40 @@
-import {playPokemonLowMusic, takeDamageSoundEffect} from "../../music.js"
-import {showStartMenu} from "./Menu/StartMenu.js"
+import {takeDamageSoundEffect} from "../../music.js"
 import {showMessageMenu} from "./Menu/MessageMenu.js"
-import {updatePokemonHealth} from "./PokemonStatus.js"
-import {sleep} from "../../script.js"
-import {
-    currentOpponentPokemon,
-    currentOpponentPokemonElement,
-    currentPlayerPokemon,
-    currentPlayerPokemonElement
-} from "./Characters.js"
+import {updateOpponentPokemonHealth, updatePlayerPokemonHealth} from "./StatusCard/PokemonStatus.js"
+import {opponent} from "../../script.js"
+import {currentOpponentPokemon, currentPlayerPokemon} from "./Characters.js"
+import {calculateDamage} from "./CalculateDamage.js"
+import {checkOpponentPokemonHealth, checkPlayerPokemonHealth} from "./TrainerTurns.js"
 
-export async function playerUseAbility(ability) {
-    await showMessageMenu(`${currentPlayerPokemon.name} uses ${ability.name}!`)
+export async function playerUseMove(move) {
+    await showMessageMenu(`${currentPlayerPokemon.name} use ${move.name}!`)
 
-    await ability.animation(currentPlayerPokemonElement)
+    await move.animation(currentPlayerPokemon)
 
     takeDamageSoundEffect()
-    currentOpponentPokemon.takeDamage(ability.damage * (currentOpponentPokemon.level / 2))
 
-    await currentOpponentPokemonElement.animate([
-        {opacity: '.5'},
-        {opacity: '1'},
-        {opacity: '.5'},
-        {opacity: '1'},
-        {opacity: '.5'},
-    ], {
-        duration: 600,
-    })
+    const {damage, message} = calculateDamage(currentPlayerPokemon, currentOpponentPokemon, move)
 
-    updatePokemonHealth()
-
-    await sleep(1000)
-
-    opponentTurn()
+    await currentOpponentPokemon.takeDamage(damage)
+    move.useMove()
+    await updateOpponentPokemonHealth()
+    if (message) await showMessageMenu(message)
+    await checkOpponentPokemonHealth()
 }
 
-function opponentTurn() {
-    if (currentOpponentPokemon.isTakenDown) {
-        // this.opponentCheckNextPokemon()
-    } else {
-        const randomAbility = currentOpponentPokemon.abilities[
-            Math.floor(Math.random() * currentOpponentPokemon.abilities.length)
-        ]
+export async function opponentUseMove(move) {
+    await showMessageMenu(`${opponent.nickname}'s ${currentOpponentPokemon.name} uses ${move.name}!`)
 
-        opponentUseMove(randomAbility).then(_ => {
-            showStartMenu()
-        })
-    }
-}
-
-export async function opponentUseMove(ability) {
-    await showMessageMenu(`${currentOpponentPokemon.name} uses ${ability.name}!`)
-
-    await ability.animationFromOpponent(currentOpponentPokemonElement)
+    await move.animationFromOpponent(currentOpponentPokemon)
 
     takeDamageSoundEffect()
-    currentPlayerPokemon.takeDamage(ability.damage * (currentOpponentPokemon.level / 2))
-    checkIfPlayerPokemonIsLow()
 
-    await currentPlayerPokemonElement.animate([
-        {opacity: '.5'},
-        {opacity: '1'},
-        {opacity: '.5'},
-        {opacity: '1'},
-        {opacity: '.5'},
-    ], {
-        duration: 600,
-    })
+    const {damage, message} = calculateDamage(currentOpponentPokemon, currentPlayerPokemon, move)
+    await currentPlayerPokemon.takeDamage(damage)
 
-    updatePokemonHealth()
+    move.useMove()
 
-    await sleep(1000)
-}
-
-function checkIfPlayerPokemonIsLow() {
-    if (currentPlayerPokemon.currentHealth < 20) {
-        playPokemonLowMusic()
-    }
+    await updatePlayerPokemonHealth()
+    if (message) await showMessageMenu(message)
+    await checkPlayerPokemonHealth()
 }

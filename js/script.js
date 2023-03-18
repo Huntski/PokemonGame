@@ -2,6 +2,8 @@ import {openStartScreen} from "./StartScreen.js"
 import {Player} from "./players/Player.js"
 import {Squirtle} from "./pokemon/Squirtle.js"
 import {Opponent} from "./players/Opponent.js"
+import {Dratini} from "./pokemon/Dratini.js"
+import {showPokemonSelectMenu} from "./views/Battle/Menu/PokemonSelectMenu.js"
 
 export const gameCanvas = document.querySelector('#game-canvas')
 
@@ -19,20 +21,27 @@ export const player = new Player({
     name: 'Wieb',
 
     pokemon: [
-        new Squirtle(),
+        new Dratini(10),
+        new Squirtle(8),
+        new Dratini(10),
+        new Dratini(10),
+        new Dratini(10),
+        new Dratini(10),
+    ],
 
-        new Squirtle(),
-    ]
+    picture: 'img/characters/player-frame.png'
 })
 
 export const opponent = new Opponent({
-    name: 'James',
+    name: 'Cheren',
 
     pokemon: [
-        new Squirtle(),
+        new Squirtle(8),
+        new Squirtle(8),
+        new Squirtle(8),
+    ],
 
-        new Squirtle(),
-    ]
+    picture: 'img/characters/cheren.webp',
 })
 
 openStartScreen()

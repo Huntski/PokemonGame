@@ -7,7 +7,13 @@ export class Move {
     type = 'normal'
 
     getMoveDamage(level) {
-        return this.damage + level
+        return this.damage * (level / 2)
+    }
+
+    useMove() {
+        if (this.ppUsed < this.pp) {
+            this.ppUsed++
+        }
     }
 
     get currentPP() {

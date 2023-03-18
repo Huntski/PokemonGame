@@ -1,21 +1,19 @@
-import {battleMenu} from "../Battle.js"
-import {playerUseAbility} from "../AttackEvents.js"
+import {playerUseMove} from "../AttackEvents.js"
 import {currentPlayerPokemon} from "../Characters.js"
+import {setBattleMenuContent} from "./BattleMenu.js"
 
 export let fightMenu = null
 let abilityStatusElement = null
 
 export function showFightMenu() {
-    battleMenu.innerHTML = ''
-
     fightMenu = document.createElement('div')
 
     fightMenu.classList.add('fight-menu')
 
     fightMenu.innerHTML = `
-            <div class="ability-options"></div>
-            
-            <div class="ability-status right-menu"></div>`
+        <div class="ability-options"></div>
+        
+        <div class="ability-status right-menu"></div>`
 
     const abilityOptions = fightMenu.querySelector('.ability-options')
     abilityStatusElement = fightMenu.querySelector('.ability-status')
@@ -26,7 +24,7 @@ export function showFightMenu() {
         abilityButton.textContent = ability.name
 
         abilityButton.onclick = () => {
-            playerUseAbility(ability)
+            playerUseMove(ability)
         }
 
         abilityButton.onmouseleave = emptyStatus
@@ -38,12 +36,12 @@ export function showFightMenu() {
         abilityOptions.append(abilityButton)
     })
 
-    battleMenu.append(fightMenu)
+    setBattleMenuContent(fightMenu)
 }
 
 function showMoveStatus(ability) {
     abilityStatusElement.innerHTML = `
-        <p>${ability.currentPP}/20</p>
+        <p>${ability.currentPP}/${ability.pp}</p>
         <p>${ability.type}</p>
     `
 }

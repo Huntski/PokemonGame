@@ -15,7 +15,6 @@ function startScreenTemplate() {
     const startButton =  nodeElement.querySelector('.start-button')
     startButton.addEventListener('click', handleClickStartEvent)
 
-
     return nodeElement
 }
 

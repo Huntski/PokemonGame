@@ -13,7 +13,6 @@
     border-radius: 5px;
     width: 100%;
     height: 100%;
-    animation: fadeIn 300ms ease-out;
 }
 
 .battle-menu .right-menu {
@@ -57,13 +56,13 @@
 
 .ability-options {
     position: absolute;
-    z-index: 40;
+    z-index: 10;
     left: 0;
     bottom: 0;
     margin: 15px;
     width: 40%;
     min-height: 100%;
-    background: #c9c9c9;
+    background: #3a3a3a;
     border-radius: 5px;
     display: grid;
 }
@@ -78,6 +77,7 @@
     font-size: 1em;
     font-weight: bold;
     font-style: italic;
+    color: white;
     text-transform: uppercase;
 }
 

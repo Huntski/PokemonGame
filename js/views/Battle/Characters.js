@@ -1,21 +1,18 @@
 import {opponentContainer, playerContainer} from "./Battle.js"
 import {opponent, player, sleep} from "../../script.js"
 import {showMessageMenu} from "./Menu/MessageMenu.js"
-import {showOpponentPokemonStatus, showPlayerPokemonStatus} from "./PokemonStatus.js"
+import {showOpponentPokemonStatus, showPlayerPokemonStatus} from "./StatusCard/PokemonStatus.js"
 
 export let currentPlayerPokemon = null
-export let currentPlayerPokemonElement = null
 export let currentOpponentPokemon = null
-export let currentOpponentPokemonElement = null
 
 export let playerElement = null
 export let opponentElement = null
 
 export function showPlayerCharacter() {
     const element = document.createElement('img')
-    element.id = 'player-image'
     element.src = player.imageSrc
-    element.classList.add('animate-slide-right')
+    element.classList.add('character')
 
     playerContainer.append(element)
 
@@ -35,9 +32,8 @@ export async function hidePlayerCharacter() {
 
 export function showOpponentCharacter() {
     const element = document.createElement('img')
-    element.id = 'player-image'
-    element.src = player.imageSrc
-    element.classList.add('animate-slide-left')
+    element.src = opponent.imageSrc
+    element.classList.add('character')
 
     opponentContainer.append(element)
 
@@ -64,39 +60,41 @@ export async function loadInPlayerPokemon(pokemon) {
 
     const pokemonElement = document.createElement('img')
     pokemonElement.src = pokemon.characterFromBack
-    pokemonElement.classList.add('animate-pokemon-join')
+    pokemonElement.classList.add('animate-pokemon-join', 'pokemon')
 
     playerContainer.append(pokemonElement)
 
-    currentPlayerPokemonElement = pokemonElement
+    currentPlayerPokemon.setPokemonElement(pokemonElement)
     currentPlayerPokemon = pokemon
 
+    pokemon.cry()
+
     await sleep(500)
-
     showPlayerPokemonStatus()
-
     await sleep(500)
 }
 
 export async function loadInOpponentPokemon(pokemon) {
     opponentContainer.innerHTML = ''
 
-    await showMessageMenu(`Trainer ${opponent.nickname} send in <br>${pokemon.name}!`)
+    await showMessageMenu(`Rival ${opponent.nickname} send in <br>${pokemon.name}!`)
 
     currentOpponentPokemon = pokemon
 
     const pokemonElement = document.createElement('img')
     pokemonElement.src = pokemon.characterFromFront
-    pokemonElement.classList.add('animate-pokemon-join')
+    pokemonElement.classList.add('animate-pokemon-join', 'pokemon')
 
     opponentContainer.append(pokemonElement)
 
-    currentOpponentPokemonElement = pokemonElement
+    currentOpponentPokemon.setPokemonElement(pokemonElement)
     currentOpponentPokemon = pokemon
 
-    await sleep(500)
+    pokemon.cry()
+
+    await sleep(1000)
 
     showOpponentPokemonStatus()
 
-    await sleep(500)
+    await sleep(1000)
 }

@@ -2,10 +2,10 @@ import {Move} from "./Move.js"
 
 export class Tackle extends Move {
     name = 'Tackle'
-    damage = 15
+    damage = 5
 
-    animation = async (pokemonElement) => {
-        await pokemonElement.animate([
+    animation = async (pokemon) => {
+        await pokemon.element.animate([
             {transform: `translate(0)`},
             {transform: `translate(-40px)`},
             {transform: `translate(50px)`},
@@ -15,8 +15,8 @@ export class Tackle extends Move {
         }).finished
     }
 
-    animationFromOpponent = async (pokemonElement) => {
-        await pokemonElement.animate([
+    animationFromOpponent = async (pokemon) => {
+        await pokemon.element.animate([
             {transform: `translate(0)`},
             {transform: `translate(40px)`},
             {transform: `translate(-50px)`},

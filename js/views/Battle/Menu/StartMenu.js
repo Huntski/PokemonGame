@@ -1,28 +1,49 @@
-import {battleMenu} from "../Battle.js"
 import {showFightMenu} from "./FightMenu.js"
+import {menuSoundEffect} from "../../../music.js"
+import {setBattleMenuContent} from "./BattleMenu.js"
+import {showPokemonSelectMenu} from "./PokemonSelectMenu.js"
+import {showMessageMenu} from "./MessageMenu.js"
 
 export let startMenu = null
 
 export function showStartMenu() {
-    battleMenu.innerHTML = ''
-
     startMenu = document.createElement('div')
 
     startMenu.classList.add('start-menu')
 
     startMenu.innerHTML = `
                 <div class="main-options__buttons right-menu">
-                    <button id="fight-button">FIGHT</button>
-                    <button id="items-button">ITEMS</button>
-                    <button id="pokemon-button">POKEMON</button>
-                    <button id="run-button">RUN</button>
+                    <button id="fight">FIGHT</button>
+                    <button id="items">ITEMS</button>
+                    <button id="pokemon">POKEMON</button>
+                    <button id="run">RUN</button>
                 </div>`
 
-    const fightButton = startMenu.querySelector('#fight-button')
+    const fightButton = startMenu.querySelector('#fight')
+    const itemsButton = startMenu.querySelector('#items')
+    const pokemonButton = startMenu.querySelector('#pokemon')
+    const runButton = startMenu.querySelector('#run')
 
     fightButton.onclick = () => {
+        menuSoundEffect()
         showFightMenu()
     }
 
-    battleMenu.append(startMenu)
+    itemsButton.onclick = () => {
+        menuSoundEffect()
+        // showPokemonSelectMenu()
+    }
+
+    pokemonButton.onclick = () => {
+        showPokemonSelectMenu()
+    }
+
+    runButton.onclick = () => {
+        menuSoundEffect()
+        showMessageMenu('You can\'t run from this battle!').then(_ => {
+            showStartMenu()
+        })
+    }
+
+    setBattleMenuContent(startMenu)
 }

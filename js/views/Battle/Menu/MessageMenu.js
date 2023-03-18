@@ -1,25 +1,21 @@
-import {battleMenu} from "../Battle.js"
 import {sleep} from "../../../script.js"
+import {setBattleMenuContent} from "./BattleMenu.js"
 
 export let messageMenu = null
 
-export async function showMessageMenu(message = '', instant = false) {
-    battleMenu.innerHTML = ''
-
-    await sleep(400)
-
+export async function showMessageMenu(message = '', duration = 1000) {
     messageMenu = document.createElement('div')
 
     messageMenu.classList.add('message-menu')
 
-    battleMenu.append(messageMenu)
+    setBattleMenuContent(messageMenu)
 
     const wordsInMessage = message.split(' ')
 
-    for (let i = 0; i < wordsInMessage.length; i ++) {
+    for (let i = 0; i < wordsInMessage.length; i++) {
         messageMenu.innerHTML += wordsInMessage[i] + ' '
         await sleep(50)
     }
 
-    return sleep(1000)
+    return sleep(duration)
 }

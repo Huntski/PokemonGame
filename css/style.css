@@ -2,6 +2,7 @@
 @import 'startscreen.css';
 @import 'battle-menu.css';
 @import 'move-animations.css';
+@import 'pokemon-menu.css';
 
 html, body {
     height: 100vh;
@@ -30,20 +31,11 @@ button {
     border-radius: 5px;
 }
 
-.player-container img,
-.opponent-container img {
-    position: relative;
-    width: 100%;
-    height: 100%;
-    object-fit: contain;
-    image-rendering: pixelated;
-}
-
 .player-container {
     position: absolute;
     z-index: 5;
     left: 10%;
-    bottom: 25%;
+    bottom: 22%;
     height: 40%;
     display: flex;
     justify-content: center;
@@ -67,27 +59,47 @@ button {
     z-index: 5;
     right: 10%;
     top: 5%;
+    width: 20%;
     height: 40%;
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
-.opponent-container img {
-    width: 80%;
+.opponent-container .pokemon {
+    height: 80%;
+}
+
+.opponent-container .character {
+    margin-bottom: 20px;
 }
 
 .opponent-container:before {
     content: "";
     position: absolute;
-    left: 0;
+    left: -10%;
     right: 0;
     margin: auto;
-    bottom: -10%;
+    bottom: 0;
     width: 100%;
-    height: 40%;
+    height: 20%;
     border-radius: 50%;
     background: #e8e8e8;
+}
+
+.player-container img,
+.opponent-container img {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    image-rendering: pixelated;
+    aspect-ratio: 1 / 1;
+}
+
+.pokemon {
+    height: 70%;
+    aspect-ratio: 1 / 1;
 }
 
 .battle-ui {
@@ -98,7 +110,7 @@ button {
     bottom: 0;
     width: 100%;
     height: 100%;
-    z-index: 20;
+    z-index: 10;
     padding: 5px;
     gap: 5px;
     display: flex;
@@ -109,18 +121,20 @@ button {
 }
 
 .status {
-    display: none;
     position: relative;
-    color: white;
-    background-color: #252525;
-    padding: 3%;
-    border-radius: 5px;
     align-self: flex-start;
     width: 40%;
-    animation: fadeIn 300ms;
 }
 
-.status:before {
+.pokemon-status {
+    color: white;
+    background-color: #252525;
+    animation: fadeIn 300ms;
+    padding: 3%;
+    border-radius: 5px;
+}
+
+.pokemon-status:before {
     content: '';
     position: absolute;
     top: 0;
@@ -130,21 +144,21 @@ button {
     border-left: 30px solid #252525;
 }
 
-.status__name {
+.pokemon-status__name {
     display: flex;
     align-items: center;
     gap: 20px;
     margin-bottom: 5px;
 }
 
-.status__health {
+.pokemon-status__health {
     display: flex;
     align-items: center;
     gap: 10px;
     width: 100%;
 }
 
-.status__health span {
+.pokemon-status__health span {
     color: #FCFF5E;
 }
 
@@ -154,6 +168,7 @@ button {
     background: #121212;
     height: 10px;
     border-radius: 50px;
+    overflow: hidden;
 }
 
 .health-bar:after {
@@ -169,13 +184,14 @@ button {
 
 .current-health {
     position: absolute;
+    z-index: 2;
     top: 0;
     left: 0;
+    width: 100%;
     height: 100%;
     border-radius: inherit;
     background-color: #E53428;
-    z-index: 20;
-    transition: width 300ms ease;
+    transform-origin: left;
 }
 
 .status--opponent {
@@ -205,7 +221,7 @@ button {
 @keyframes fadeInFromRight {
     from {
         opacity: 0;
-        transform: translateX(50%);
+        transform: translateX(80%);
     }
 
     60% {
@@ -221,7 +237,7 @@ button {
 @keyframes fadeInFromLeft {
     from {
         opacity: 0;
-        transform: translateX(-50%);
+        transform: translateX(-80%);
     }
 
     60% {
