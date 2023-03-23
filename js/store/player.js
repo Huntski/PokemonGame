@@ -22,6 +22,10 @@ export const player = new Store({
             return state.pokemon
         },
 
+        getElement(state) {
+            return state.element
+        },
+
         getFirstPokemon(state) {
             return state.player.currentlyHolding[0]
         }
@@ -53,7 +57,9 @@ export const player = new Store({
         },
 
         async hidePlayerCharacter({getters}) {
-            return getters['getPlayer'].element.animate([
+            console.log(getters)
+
+            return getters['getElement'].animate([
                 {transform: 'translateX(0)', opacity: 1},
                 {transform: 'translateX(-100px)', opacity: 0}
             ], {

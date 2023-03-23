@@ -9,16 +9,15 @@ import {
 } from "./StatusCard/PokemonStatus.js"
 import {opponentTurn} from "./TrainerTurns.js"
 import {checkWhichMusicToPlay} from "../../music.js"
-import {battle} from "../../store/battle.js"
 import {opponent, opponentStates} from "../../store/opponent.js"
-import {player} from "../../store/player.js"
+import {player, playerStates} from "../../store/player.js"
 
 export async function loadInPlayerPokemon(pokemon) {
     playerContainer.innerHTML = ''
 
     await showMessage(`You send in <br>${pokemon.name}!`)
 
-    player.getters['getPokemon'] = pokemon
+    await player.commit(playerStates.SET_POKEMON, pokemon)
 
     const pokemonElement = document.createElement('img')
     pokemonElement.src = pokemon.characterFromBack
@@ -26,7 +25,7 @@ export async function loadInPlayerPokemon(pokemon) {
 
     playerContainer.append(pokemonElement)
 
-    player.getters['getPokemon'].setPokemonElement(pokemonElement)
+    pokemon.setPokemonElement(pokemonElement)
     player.getters['getPokemon'] = pokemon
 
     pokemon.cry()
@@ -48,8 +47,8 @@ export async function loadInOpponentPokemon(pokemon) {
 
     opponentContainer.append(pokemonElement)
 
+    pokemon.setPokemonElement(pokemonElement)
     await opponent.commit(opponentStates.SET_POKEMON, pokemon)
-    await opponent.commit(opponentStates.SET_ELEMENT, pokemonElement)
 
     pokemon.cry()
 

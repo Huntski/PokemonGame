@@ -1,7 +1,7 @@
 import {gameCanvas, resetCanvas, sleep} from "../../script.js"
 import {playBattleMusic} from "../../music.js"
 import {loadInOpponentPokemon, loadInPlayerPokemon} from "./PokemonEvents.js"
-import {battle, battleStates} from "../../store/battle.js"
+import {battle} from "../../store/battle.js"
 import {opponent} from "../../store/opponent.js"
 import {player} from "../../store/player.js"
 
@@ -50,20 +50,19 @@ function CreateBattleInterface() {
 }
 
 async function startBattleSequence() {
-    try {
-        await player.dispatch('showPlayerCharacter')
-        await opponent.dispatch('showOpponentCharacter')
-        await sleep(1000)
-        await battle.dispatch('message', `You have been challenged by <br>Trainer ${opponent.getters['getOpponent'].nickname}`)
-        await opponent.dispatch('hideOpponentCharacter')
-        await loadInOpponentPokemon(opponent.getters['getRandomPokemon'])
-        await player.dispatch('hidePlayerCharacter')
-        await loadInPlayerPokemon(player.getters['getFirstPokemon'])
-        await battle.commit(battleStates.START)
-        await createKeyboardEvents()
-    } catch (e) {
-        console.log(e)
-    }
+    await player.dispatch('showPlayerCharacter')
+    await opponent.dispatch('showOpponentCharacter')
+    await sleep(1000)
+
+    await battle.dispatch('message', `You have been challenged by <br>Trainer ${opponent.getters['getOpponent'].nickname}`)
+    await opponent.dispatch('hideOpponentCharacter')
+    await loadInOpponentPokemon(opponent.getters['getRandomPokemon'])
+
+    await player.dispatch('hidePlayerCharacter')
+    await loadInPlayerPokemon(player.getters['getFirstPokemon'])
+
+    await battle.dispatch('startMenu')
+    await createKeyboardEvents()
 }
 
 async function createKeyboardEvents() {

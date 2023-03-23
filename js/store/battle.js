@@ -24,27 +24,20 @@ export const battle = new Store({
     },
 
     actions: {
+        async startMenu({commit}) {
+            commit('SET_CURRENT_MENU', await showStartMenu())
+        },
+
         async message({commit}, params) {
-            commit(battleStates.MESSAGE, await showMessage(params))
+            commit('SET_CURRENT_MENU', await showMessage(params))
         },
 
         async fightMenu({commit}) {
-            commit(battleStates.FIGHT_MENU, await showFightMenu())
-        },
-
-        async startMenu({commit}) {
-            commit(battleStates.START, await showStartMenu())
+            commit('SET_CURRENT_MENU', await showFightMenu())
         },
 
         async pokemonSelectMenu({commit}) {
-            commit(battleStates.POKEMON_SELECT, await showPokemonSelectMenu())
-        }
+            commit('SET_CURRENT_MENU', await showPokemonSelectMenu())
+        },
     }
 })
-
-export const battleStates = {
-    MESSAGE: "MESSAGE",
-    FIGHT_MENU: "FIGHT_MENU",
-    START: "START",
-    POKEMON_SELECT: "POKEMON_SELECT",
-}

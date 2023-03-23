@@ -35,9 +35,7 @@ export async function playerUseMove(move) {
 }
 
 export async function opponentUseMove(move) {
-    const opponent = battle.getters['getOpponent']
-
-    await showMessage(`${opponent.nickname}'s ${opponent.getters['getPokemon'].name} uses ${move.name}!`)
+    await showMessage(`${opponent.getters['getOpponent'].nickname}'s ${opponent.getters['getPokemon'].name} uses ${move.name}!`)
 
     await move.animationFromOpponent(opponent.getters['getPokemon'])
 

@@ -16,7 +16,7 @@ class Store {
         console.log(MUTATION, params)
 
         try {
-            await this.beforeMutation(MUTATION)
+            await this.beforeMutation(MUTATION, params)
 
             this.MutationTree[MUTATION](this.StateTree, params)
         } catch (e) {
@@ -30,6 +30,8 @@ class Store {
         for (let getter in this.GetterTree) {
             getters[getter] = this.GetterTree[getter](this.StateTree)
         }
+
+        console.log(getters)
 
         return getters
     }

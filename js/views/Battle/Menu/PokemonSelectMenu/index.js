@@ -2,6 +2,7 @@ import {gameCanvas} from "../../../../script.js"
 import {menuSoundEffect} from "../../../../music.js"
 import createMenuFooter from "./MenuFooter.js"
 import createPokemonOption from "./PokemonMenuOption.js"
+import {player} from "../../../../store/player.js"
 
 let pokemonSelectMenu = null
 

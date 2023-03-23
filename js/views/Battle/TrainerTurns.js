@@ -1,5 +1,5 @@
 import {opponentUseMove} from "./BattleEvents.js"
-import {battle, battleStates} from "../../store/battle.js"
+import {battle} from "../../store/battle.js"
 import {opponent} from "../../store/opponent.js"
 
 export async function opponentTurn() {

@@ -1,7 +1,7 @@
 import {menuSoundEffect} from "../../../music.js"
 import {setBattleMenuContent} from "./BattleMenu.js"
 import {opponentTurn} from "../TrainerTurns.js"
-import {battle, battleStates} from "../../../store/battle.js"
+import {battle} from "../../../store/battle.js"
 
 export async function showStartMenu() {
     const startMenu = document.createElement('div')
@@ -23,22 +23,21 @@ export async function showStartMenu() {
 
     fightButton.onclick = () => {
         menuSoundEffect()
-        battle.commit(battleStates.FIGHT_MENU)
+        battle.dispatch('fightMenu')
     }
 
     itemsButton.onclick = () => {
         menuSoundEffect()
-        // battle.commit(battleStates.)
     }
 
     pokemonButton.onclick = () => {
         menuSoundEffect()
-        battle.commit(battleStates.POKEMON_SELECT)
+        battle.dispatch('pokemonSelectMenu')
     }
 
     runButton.onclick = async () => {
         menuSoundEffect()
-        await battle.commit(battleStates.MESSAGE, 'You can\'t run from this battle!')
+        await battle.dispatch('message', 'You can\'t run from this battle!')
         await opponentTurn()
     }
 
