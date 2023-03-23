@@ -40,6 +40,10 @@
     background-image: linear-gradient(to bottom, #1b77a9, #145a80);
 }
 
+.pokemon-option.active {
+    border-color: yellow;
+}
+
 .pokemon-option__info {
     display: flex;
     gap: 5px;
@@ -122,6 +126,7 @@
 .pokemon-option.fainted {
     background-image: linear-gradient(to bottom, #555859, #3f4142);
     color: #e8e8e8;
+    pointer-events: none;
 }
 .pokemon-option.fainted .pokemon-option__image {
     background-image: linear-gradient(to bottom right, #353636, #1b1c1c);

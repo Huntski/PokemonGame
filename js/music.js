@@ -1,6 +1,16 @@
-let defaultVolume = 0.5
+import {player} from "./store/player.js"
+
+let defaultVolume = 0
 const sounds = {}
 const music = {}
+
+export function checkWhichMusicToPlay() {
+    if (player.getters['getPokemon'].isLow) {
+        playPokemonLowMusic()
+    } else {
+        playBattleMusic()
+    }
+}
 
 export function stopMusic() {
     for (let key in music) {
@@ -10,31 +20,33 @@ export function stopMusic() {
 }
 
 export function playBattleMusic() {
-    stopMusic()
-
     if (music['battleMusic'] === undefined) {
         music['battleMusic'] = createSoundElement("sounds/black&white_trainer-music.mp3")
+        music['battleMusic'].setAttribute("loop", '')
     }
 
-    music['battleMusic'].setAttribute("loop", '')
-    music['battleMusic'].play()
+    if (music['battleMusic'].paused) {
+        stopMusic()
+        music['battleMusic'].play()
+    }
 }
 
 export function playPokemonLowMusic() {
     if (music['lowMusic'] === undefined) {
         music['lowMusic'] = createSoundElement("sounds/black&white_low-music.mp3")
+        music['lowMusic'].setAttribute("loop", '')
     }
 
     if (music['lowMusic'].paused) {
         stopMusic()
-        music['lowMusic'].setAttribute("loop", '')
         music['lowMusic'].play()
     }
 }
 
 export function menuSoundEffect() {
+    // Sound effect source: https://www.youtube.com/watch?v=5UHmxWsPNzg
     if (sounds['selectMenu'] === undefined) {
-        sounds['selectMenu'] = createSoundElement("sounds/menubutton-select-sound.mp3")
+        sounds['selectMenu'] = createSoundElement("sounds/Pokemon (A Button) - Sound Effect (HD).mp3")
     }
 
     sounds['selectMenu'].play()

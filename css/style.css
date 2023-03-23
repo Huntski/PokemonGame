@@ -256,7 +256,7 @@ button {
     }
 }
 
-.animate-lowhp {
+.pokemon-low-hp {
     animation: animatePokemonLowHP 600ms linear infinite;
 }
 

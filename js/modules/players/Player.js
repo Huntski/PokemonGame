@@ -1,6 +1,7 @@
 export class Player {
     constructor({name = 'Player', pokemon = [], picture = '' }) {
         this.pokemon = []
+        this.items = []
         this.currentlyHolding = []
         this.imageSrc = picture
 

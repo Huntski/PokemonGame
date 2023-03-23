@@ -1,43 +1,15 @@
-import {gameCanvas, player} from "../../../script.js"
-import {changeHealthBarColor} from "../StatusCard/PokemonStatus.js"
-import {playerChangePokemon} from "../BattleEvents.js"
-import {opponentTurn} from "../TrainerTurns.js"
+import {changeHealthBarColor} from "../../StatusCard/PokemonStatus.js"
+import {playerChangePokemon} from "../../BattleEvents.js"
+import {opponentTurn} from "../../TrainerTurns.js"
+import {closePokemonSelectMenu} from "./index.js"
+import {player} from "../../../../store/player.js"
 
-let pokemonSelectMenu = null
-
-export function showPokemonSelectMenu() {
-    pokemonSelectMenu = document.createElement('div')
-
-    pokemonSelectMenu.classList.add('pokemon-select-menu')
-
-    pokemonSelectMenu.innerHTML = `
-        <div class="pokemon-options"></div>
-
-        <div class="pokemon-select-menu__footer">
-            <h2>Choose a Pokémon</h2>
-            
-            <button class="button--cancel">CANCEL</button>
-        </div>`
-
-    const pokemonOptions = pokemonSelectMenu.querySelector('.pokemon-options')
-
-    player.currentlyHolding.forEach(pokemon => {
-        pokemonOptions.append(createPokemonOption(pokemon))
-    })
-
-    const cancelButton = pokemonSelectMenu.querySelector('.button--cancel')
-    cancelButton.onclick = closePokemonSelectMenu
-
-    gameCanvas.append(pokemonSelectMenu)
-}
-
-function closePokemonSelectMenu() {
-    gameCanvas.removeChild(pokemonSelectMenu)
-}
-
-function createPokemonOption(pokemon) {
+export default function createPokemonOption(pokemon) {
     const option = document.createElement('div')
     option.classList.add('pokemon-option')
+    if (pokemon.id === player.getters['getPokemon'].id) {
+        option.classList.add('active')
+    }
 
     if (pokemon.fainted) {
         option.classList.add('fainted')
@@ -77,3 +49,4 @@ function createPokemonOption(pokemon) {
 
     return option
 }
+

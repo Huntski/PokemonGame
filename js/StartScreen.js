@@ -1,5 +1,5 @@
 import {gameCanvas} from "./script.js"
-import {startBattle} from "./views/Battle/Battle.js"
+import {startBattle} from "./views/Battle/BattleSequence.js"
 
 export function openStartScreen() {
     gameCanvas.append(startScreenTemplate())

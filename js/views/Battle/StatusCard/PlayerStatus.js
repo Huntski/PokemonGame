@@ -1,4 +1,4 @@
-import {playerStatus} from "../Battle.js"
+import {playerStatus} from "../BattleSequence.js"
 
 export function showPlayerStatus() {
     playerStatus.innerHTML = `

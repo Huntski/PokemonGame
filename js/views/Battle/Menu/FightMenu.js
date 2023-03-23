@@ -1,12 +1,10 @@
 import {playerUseMove} from "../BattleEvents.js"
 import {setBattleMenuContent} from "./BattleMenu.js"
-import {currentPlayerPokemon} from "../PokemonEvents.js"
-
-export let fightMenu = null
-let abilityStatusElement = null
+import {menuSoundEffect} from "../../../music.js"
+import {player} from "../../../store/player.js"
 
 export function showFightMenu() {
-    fightMenu = document.createElement('div')
+    const fightMenu = document.createElement('div')
 
     fightMenu.classList.add('fight-menu')
 
@@ -16,36 +14,36 @@ export function showFightMenu() {
         <div class="ability-status right-menu"></div>`
 
     const abilityOptions = fightMenu.querySelector('.ability-options')
-    abilityStatusElement = fightMenu.querySelector('.ability-status')
+    const abilityStatusElement = fightMenu.querySelector('.ability-status')
 
-    currentPlayerPokemon.abilities.forEach(ability => {
+    player.getters['getPokemon'].abilities.forEach(ability => {
         const abilityButton = document.createElement('button')
 
         abilityButton.textContent = ability.name
 
         abilityButton.onclick = () => {
+            menuSoundEffect()
             playerUseMove(ability)
         }
 
-        abilityButton.onmouseleave = emptyStatus
+        abilityButton.onmouseleave = () => {
+            abilityStatusElement.innerHTML = ''
+        }
 
         abilityButton.onmouseenter = () => {
-            showMoveStatus(ability)
+            updateStatusElement(ability, abilityStatusElement)
         }
 
         abilityOptions.append(abilityButton)
     })
 
     setBattleMenuContent(fightMenu)
+
+    return fightMenu
 }
 
-function showMoveStatus(ability) {
-    abilityStatusElement.innerHTML = `
+function updateStatusElement(ability, element) {
+    element.innerHTML = `
         <p>${ability.currentPP}/${ability.pp}</p>
-        <p>${ability.type}</p>
-    `
-}
-
-function emptyStatus() {
-    abilityStatusElement.innerHTML = ''
+        <p>${ability.type}</p>`
 }

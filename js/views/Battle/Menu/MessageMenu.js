@@ -1,10 +1,8 @@
 import {sleep} from "../../../script.js"
 import {setBattleMenuContent} from "./BattleMenu.js"
 
-export let messageMenu = null
-
-export async function showMessageMenu(message = '', duration = 1000) {
-    messageMenu = document.createElement('div')
+export async function showMessage(message) {
+    const messageMenu = document.createElement('div')
 
     messageMenu.classList.add('message-menu')
 
@@ -17,5 +15,7 @@ export async function showMessageMenu(message = '', duration = 1000) {
         await sleep(50)
     }
 
-    return sleep(duration)
+    await sleep(1000)
+
+    return messageMenu
 }

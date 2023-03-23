@@ -1,14 +1,9 @@
-import {gameCanvas, opponent, player, resetCanvas, sleep} from "../../script.js"
+import {gameCanvas, resetCanvas, sleep} from "../../script.js"
 import {playBattleMusic} from "../../music.js"
-import {
-    hideOpponentCharacter,
-    hidePlayerCharacter,
-    showOpponentCharacter,
-    showPlayerCharacter
-} from "./CharacterEvents.js"
-import {showStartMenu} from "./Menu/StartMenu.js"
-import {showMessageMenu} from "./Menu/MessageMenu.js"
 import {loadInOpponentPokemon, loadInPlayerPokemon} from "./PokemonEvents.js"
+import {battle, battleStates} from "../../store/battle.js"
+import {opponent} from "../../store/opponent.js"
+import {player} from "../../store/player.js"
 
 export let battleMenu = null
 export let playerStatus = null
@@ -18,9 +13,7 @@ export let battleCanvas = null
 export function startBattle() {
     resetCanvas()
     playBattleMusic()
-    sleep(300).then(() => {
-        CreateBattleInterface()
-    })
+    CreateBattleInterface()
 }
 
 export let playerContainer = null
@@ -53,27 +46,30 @@ function CreateBattleInterface() {
     playerContainer = gameCanvas.querySelector('.player-container')
     opponentContainer = gameCanvas.querySelector('.opponent-container')
 
-    startBattleSequence()
+    startBattleSequence().then(r => r)
 }
 
 async function startBattleSequence() {
-    showPlayerCharacter()
-    showOpponentCharacter()
-    await sleep(1000)
-    await showMessageMenu(`You have been challenged by <br>Trainer ${opponent.nickname}`)
-    await hideOpponentCharacter()
-    await loadInOpponentPokemon(opponent.pokemon[0])
-    await hidePlayerCharacter()
-    await loadInPlayerPokemon(player.pokemon[0])
-    showStartMenu()
-    createKeyboardEvents()
+    try {
+        await player.dispatch('showPlayerCharacter')
+        await opponent.dispatch('showOpponentCharacter')
+        await sleep(1000)
+        await battle.dispatch('message', `You have been challenged by <br>Trainer ${opponent.getters['getOpponent'].nickname}`)
+        await opponent.dispatch('hideOpponentCharacter')
+        await loadInOpponentPokemon(opponent.getters['getRandomPokemon'])
+        await player.dispatch('hidePlayerCharacter')
+        await loadInPlayerPokemon(player.getters['getFirstPokemon'])
+        await battle.commit(battleStates.START)
+        await createKeyboardEvents()
+    } catch (e) {
+        console.log(e)
+    }
 }
 
-function createKeyboardEvents() {
+async function createKeyboardEvents() {
     document.addEventListener('keydown', e => {
-        console.log(e.key)
         if (e.key === 'Escape') {
-            showStartMenu()
+            battle.dispatch('startMenu')
         }
     })
 }

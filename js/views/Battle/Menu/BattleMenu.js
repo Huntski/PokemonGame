@@ -1,4 +1,4 @@
-import {battleMenu} from "../Battle.js"
+import {battleMenu} from "../BattleSequence.js"
 
 export function setBattleMenuContent(HTMLElement) {
     battleMenu.innerHTML = ''

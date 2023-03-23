@@ -1,6 +1,6 @@
 import {generateId} from "./PokemonId.js"
-import {pokemonCry} from "../music.js"
-import {sleep} from "../script.js"
+import {playBattleMusic, playPokemonLowMusic, pokemonCry} from "../../music.js"
+import {sleep} from "../../script.js"
 
 export class Pokemon {
     id = generateId()
@@ -39,11 +39,21 @@ export class Pokemon {
     }
 
     get currentHealth() {
-        return this.health - this.damageTaken
+        const currentHealth = this.health - this.damageTaken
+
+        if (currentHealth < 0) {
+            return 0
+        }
+
+        return currentHealth
     }
 
     get fainted() {
         return this.currentHealth <= 0
+    }
+
+    get isLow() {
+        return this.healthPercentage < 20
     }
 
     get healthPercentage() {
@@ -82,5 +92,21 @@ export class Pokemon {
         }).finished
 
         await sleep(500)
+    }
+
+    lowEvent() {
+        this.element.classList.add('pokemon-low-hp')
+    }
+
+    heal(healedHealth) {
+        this.damageTaken -= healedHealth
+        if (this.damageTaken < 0) {
+            this.damageTaken = 0
+        }
+
+        if (this.isLow) {
+            this.element.classList.remove('pokemon-low-hp')
+            playBattleMusic()
+        }
     }
 }
