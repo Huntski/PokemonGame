@@ -1,5 +1,5 @@
 import {generateId} from "./PokemonId.js"
-import {playBattleMusic, playPokemonLowMusic, pokemonCry} from "../../music.js"
+import {playBattleMusic, pokemonCry} from "../../music.js"
 import {sleep} from "../../script.js"
 
 export class Pokemon {
@@ -98,8 +98,16 @@ export class Pokemon {
         this.element.classList.add('pokemon-low-hp')
     }
 
-    heal(healedHealth) {
-        this.damageTaken -= healedHealth
+    /**
+     * Heal Pokémon.
+     * @param healAmount
+     * @returns {number} Returns healed amount
+     */
+    heal(healAmount) {
+        const healthBeforeHeal = this.currentHealth
+
+        this.damageTaken -= healAmount
+
         if (this.damageTaken < 0) {
             this.damageTaken = 0
         }
@@ -108,5 +116,7 @@ export class Pokemon {
             this.element.classList.remove('pokemon-low-hp')
             playBattleMusic()
         }
+
+        return this.currentHealth - healthBeforeHeal
     }
 }

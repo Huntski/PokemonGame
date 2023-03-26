@@ -3,6 +3,7 @@ import {showMessage} from "../views/Battle/Menu/MessageMenu.js"
 import showPokemonSelectMenu from "../views/Battle/Menu/PokemonSelectMenu/index.js"
 import Store from "../modules/Store.js"
 import {showStartMenu} from "../views/Battle/Menu/StartMenu.js"
+import showItemsMenu from "../views/Battle/Menu/ItemsMenu/index.js"
 
 class state {
     currentMenu = ''
@@ -36,8 +37,12 @@ export const battle = new Store({
             commit('SET_CURRENT_MENU', await showFightMenu())
         },
 
-        async pokemonSelectMenu({commit}) {
-            commit('SET_CURRENT_MENU', await showPokemonSelectMenu())
+        async pokemonSelectMenu({commit}, cancelable = true) {
+            commit('SET_CURRENT_MENU', await showPokemonSelectMenu(cancelable))
+        },
+
+        async itemsMenu({commit}) {
+            commit('SET_CURRENT_MENU', await showItemsMenu())
         },
     }
 })

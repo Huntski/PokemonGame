@@ -13,7 +13,9 @@ export let battleCanvas = null
 export function startBattle() {
     resetCanvas()
     playBattleMusic()
-    CreateBattleInterface()
+    sleep(300).then(() => {
+        CreateBattleInterface()
+    })
 }
 
 export let playerContainer = null
@@ -50,6 +52,18 @@ function CreateBattleInterface() {
 }
 
 async function startBattleSequence() {
+    const debug = false
+
+    if (debug) {
+        await loadInOpponentPokemon(opponent.getters['getRandomPokemon'])
+        await loadInPlayerPokemon(player.getters['getFirstPokemon'])
+
+        await battle.dispatch('startMenu')
+        await createKeyboardEvents()
+
+        return
+    }
+
     await player.dispatch('showPlayerCharacter')
     await opponent.dispatch('showOpponentCharacter')
     await sleep(1000)

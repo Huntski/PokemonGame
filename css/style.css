@@ -1,8 +1,10 @@
 @import 'reset.css';
+@import 'fonts.css';
 @import 'startscreen.css';
 @import 'battle-menu.css';
 @import 'move-animations.css';
 @import 'pokemon-menu.css';
+@import 'items-menu.css';
 
 html, body {
     height: 100vh;
@@ -200,6 +202,48 @@ button {
 
 .status--player {
     align-self: flex-end;
+}
+
+/**
+    PopupMenu - For selecting items and pokémon.
+ */
+
+.popup-menu {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: grid;
+    z-index: 12;
+    width: 95%;
+    height: 95%;
+    margin: auto;
+    border-radius: 5px;
+    border: solid 1px green;
+    box-sizing: border-box;
+    padding: 20px;
+    background: #313131;
+    color: white;
+}
+
+.popup-menu__footer {
+    align-self: end;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 5px;
+}
+.popup-menu__footer button {
+    color: white;
+    font-size: 1em;
+    background: #E53428;
+    padding: 6px 15px;
+    border-radius: 5px;
+}
+.popup-menu__footer button:hover,
+.popup-menu__footer button:focus {
+    background: #ea3f33;
 }
 
 /**

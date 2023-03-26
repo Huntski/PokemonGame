@@ -92,3 +92,8 @@
 .ability-options button:hover:before {
     opacity: 1;
 }
+
+.ability-status {
+    padding: 20px;
+    box-sizing: border-box;
+}

@@ -1,8 +1,8 @@
-import {closePokemonSelectMenu} from "./index.js"
+import {closePokemonSelectMenu} from "./PokemonSelectMenu.js"
 
 export default function createMenuFooter(cancelable = true) {
     const footer = document.createElement('div')
-    footer.classList.add('pokemon-select-menu__footer')
+    footer.classList.add('popup-menu__footer')
 
     footer.innerHTML = `<h2>Choose a Pokémon</h2>`
 

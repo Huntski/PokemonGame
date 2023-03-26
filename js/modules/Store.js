@@ -12,6 +12,12 @@ class Store {
         this.beforeMutation = beforeMutation
     }
 
+    /**
+     * JS DOCS <-- googlen
+     * @param MUTATION 'test'|'add' Tag for mutionat
+     * @param params
+     * @returns {Promise<void>}
+     */
     async commit(MUTATION, params = {}) {
         console.log(MUTATION, params)
 

@@ -3,8 +3,8 @@ import {Tackle} from "../moves/Tackle.js"
 import {WaterPulse} from "../moves/WaterPulse.js"
 
 export class Squirtle extends Pokemon {
-    name = 'Squirtle'
-    type = 'water'
+    name = 'Abra'
+    type = 'dragon'
     cryFileSrc = 'sounds/cries/squirtle.mp3'
 
     abilities = [

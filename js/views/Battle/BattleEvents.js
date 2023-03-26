@@ -8,7 +8,6 @@ import {
 import {calculateDamage} from "./CalculateDamage.js"
 import {playerTurn} from "./TrainerTurns.js"
 import {showStartMenu} from "./Menu/StartMenu.js"
-import {battle} from "../../store/battle.js"
 import {opponent} from "../../store/opponent.js"
 import {player} from "../../store/player.js"
 import {
@@ -53,9 +52,11 @@ export async function opponentUseMove(move) {
 }
 
 export async function playerChangePokemon(newPokemon) {
-    await showMessage(`That's enough ${player.getters['getPokemon'].name}!`)
-    resetPlayerPokemonStatus()
-    await getPokemonBack(player.getters['getPokemon'])
+    if (!player.getters['getPokemon'].fainted) {
+        await showMessage(`That's enough ${player.getters['getPokemon'].name}!`)
+        resetPlayerPokemonStatus()
+        await getPokemonBack(player.getters['getPokemon'])
+    }
     await loadInPlayerPokemon(newPokemon)
     await checkPlayerPokemonHealth()
     await showStartMenu()

@@ -10,8 +10,8 @@ export async function showMessage(message) {
 
     const wordsInMessage = message.split(' ')
 
-    for (let i = 0; i < wordsInMessage.length; i++) {
-        messageMenu.innerHTML += wordsInMessage[i] + ' '
+    for (let index in wordsInMessage) {
+        messageMenu.innerHTML += wordsInMessage[index] + ' '
         await sleep(50)
     }
 

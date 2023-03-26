@@ -25,13 +25,13 @@ export function resetOpponentPokemonStatus() {
 export async function updatePlayerPokemonHealth() {
     await sleep(100)
     playerHealthBar.animate({
-        width: `${opponent.getters['getPokemon'].healthPercentage}%`
+        width: `${player.getters['getPokemon'].healthPercentage}%`
     }, {
         duration: 500,
         fill: 'forwards'
     })
 
-    changeHealthBarColor(playerHealthBar, opponent.getters['getPokemon'].healthPercentage)
+    changeHealthBarColor(playerHealthBar, player.getters['getPokemon'].healthPercentage)
     await sleep(1000)
 }
 

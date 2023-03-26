@@ -1,0 +1,22 @@
+
+/**
+    Font: Exo 2
+    Source: https://fonts.google.com/specimen/Exo+2
+ */
+@font-face {
+    font-family: 'Exo 2';
+    src: url('../fonts/Exo/Exo2-Light.ttf');
+    font-weight: 300;
+}
+
+@font-face {
+    font-family: 'Exo 2';
+    src: url('../fonts/Exo/Exo2-Regular.ttf');
+    font-weight: normal;
+}
+
+@font-face {
+    font-family: 'Exo 2';
+    src: url('../fonts/Exo/Exo2-Bold.ttf');
+    font-weight: 700;
+}

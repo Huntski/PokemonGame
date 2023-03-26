@@ -8,6 +8,7 @@ class state {
     player = null
     pokemon = null
     element = null
+    statusElement = null
 }
 
 export const player = new Store({
@@ -28,6 +29,14 @@ export const player = new Store({
 
         getFirstPokemon(state) {
             return state.player.currentlyHolding[0]
+        },
+
+        getItems(state) {
+            return state.player.items
+        },
+
+        getStatusElement(state) {
+            return state.statusElement
         }
     },
 
@@ -43,6 +52,10 @@ export const player = new Store({
         SET_ELEMENT(state, element) {
             state.element = element
         },
+
+        SET_STATUS_ELEMENT(state, element) {
+            state.statusElement = element
+        }
     },
 
     actions: {
@@ -74,5 +87,6 @@ export const player = new Store({
 export const playerStates = {
     SET_PLAYER: "SET_PLAYER",
     SET_POKEMON: "SET_POKEMON",
-    SET_ELEMENT: "SET_ELEMENT"
+    SET_ELEMENT: "SET_ELEMENT",
+    SET_STATUS_ELEMENT: "SET_STATUS_ELEMENT",
 }

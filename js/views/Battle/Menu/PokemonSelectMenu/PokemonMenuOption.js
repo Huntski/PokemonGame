@@ -1,18 +1,16 @@
 import {changeHealthBarColor} from "../../StatusCard/PokemonStatus.js"
 import {playerChangePokemon} from "../../BattleEvents.js"
 import {opponentTurn} from "../../TrainerTurns.js"
-import {closePokemonSelectMenu} from "./index.js"
 import {player} from "../../../../store/player.js"
+import {closePokemonSelectMenu} from "./PokemonSelectMenu.js"
 
-export default function createPokemonOption(pokemon) {
+export default function createPokemonOption(pokemon, cancelable = true) {
     const option = document.createElement('div')
     option.classList.add('pokemon-option')
-    if (pokemon.id === player.getters['getPokemon'].id) {
-        option.classList.add('active')
-    }
-
     if (pokemon.fainted) {
         option.classList.add('fainted')
+    } else if (pokemon.id === player.getters['getPokemon'].id) {
+        option.classList.add('active')
     }
 
     option.innerHTML = `
@@ -44,7 +42,9 @@ export default function createPokemonOption(pokemon) {
 
     option.onclick = () => {
         closePokemonSelectMenu()
-        playerChangePokemon(pokemon).then(_ => opponentTurn())
+        playerChangePokemon(pokemon).then(async _ => {
+            if (cancelable) await opponentTurn()
+        })
     }
 
     return option

@@ -1,14 +1,10 @@
 export class Player {
-    constructor({name = 'Player', pokemon = [], picture = '' }) {
-        this.pokemon = []
-        this.items = []
+    constructor({name = 'Player', pokemon = [], picture = '' , items = []}) {
+        this.pokemon = pokemon
         this.currentlyHolding = []
+        this.items = items
         this.imageSrc = picture
-
         this.name = name
-        pokemon.forEach(pokemon => {
-            this.pokemon.push(pokemon)
-        })
 
         for (let i = 0; i < 6 && i < this.pokemon.length; i++) {
             this.currentlyHolding.push(this.pokemon[i])

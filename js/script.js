@@ -5,6 +5,7 @@ import {Opponent} from "./modules/players/Opponent.js"
 import {Dratini} from "./modules/pokemon/Dratini.js"
 import {player, playerStates} from "./store/player.js"
 import {opponent, opponentStates} from "./store/opponent.js"
+import {SuperPotion} from "./modules/items/potions/SuperPotion.js"
 
 export const gameCanvas = document.querySelector('#game-canvas')
 
@@ -24,10 +25,11 @@ await player.commit(playerStates.SET_PLAYER, new Player({
     pokemon: [
         new Dratini(10),
         new Squirtle(8),
-        new Dratini(10),
-        new Dratini(10),
-        new Dratini(10),
-        new Dratini(10),
+        new Dratini(9),
+    ],
+
+    items: [
+        new SuperPotion(3)
     ],
 
     picture: 'img/characters/player-frame.png'
@@ -37,8 +39,6 @@ await opponent.commit(opponentStates.SET_OPPONENT, new Opponent({
     name: 'Cheren',
 
     pokemon: [
-        new Squirtle(8),
-        new Dratini(10),
         new Squirtle(8),
         new Dratini(10),
     ],

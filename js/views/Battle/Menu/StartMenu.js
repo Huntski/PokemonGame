@@ -28,6 +28,7 @@ export async function showStartMenu() {
 
     itemsButton.onclick = () => {
         menuSoundEffect()
+        battle.dispatch('itemsMenu')
     }
 
     pokemonButton.onclick = () => {
