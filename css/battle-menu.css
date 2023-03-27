@@ -42,7 +42,7 @@
     background: #414141;
     border-radius: 2px;
     border: none;
-    color: #747474;
+    color: white;
     font-style: italic;
     font-weight: bold;
     cursor: pointer;
@@ -50,8 +50,8 @@
 
 .main-options__buttons button:hover,
 .main-options__buttons button:active {
-    background: #FF0A53;
-    color: white;
+    background: #EFBB15;
+    color: black;
 }
 
 .ability-options {
@@ -96,4 +96,14 @@
 .ability-status {
     padding: 20px;
     box-sizing: border-box;
+}
+
+.fight-menu .right-menu {
+    display: flex;
+    justify-content: space-between;
+}
+
+.fight-menu .right-menu button {
+    justify-self: right;
+    margin: 20px 10px;
 }

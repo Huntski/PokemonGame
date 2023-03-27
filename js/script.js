@@ -23,9 +23,13 @@ await player.commit(playerStates.SET_PLAYER, new Player({
     name: 'Wieb',
 
     pokemon: [
-        new Dratini(10),
-        new Squirtle(8),
-        new Dratini(9),
+        // new Dratini(50),
+        new Squirtle({
+            level: 10,
+        }),
+        new Dratini({
+            level: 10,
+        }),
     ],
 
     items: [
@@ -39,8 +43,9 @@ await opponent.commit(opponentStates.SET_OPPONENT, new Opponent({
     name: 'Cheren',
 
     pokemon: [
-        new Squirtle(8),
-        new Dratini(10),
+        new Squirtle({
+            level: 10
+        }),
     ],
 
     picture: 'img/characters/cheren.webp',

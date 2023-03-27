@@ -3,8 +3,7 @@ import {player} from "../../../store/player.js"
 import {battle} from "../../../store/battle.js"
 import {updatePlayerPokemonHealth} from "../../../views/Battle/StatusCard/PokemonStatus.js"
 import {opponentTurn} from "../../../views/Battle/TrainerTurns.js"
-import {generateId} from "../../pokemon/PokemonId.js"
-import {healSoundEffect} from "../../../music.js"
+import {checkWhichMusicToPlay, healSoundEffect} from "../../../music.js"
 
 export class Potion extends Item {
     name = 'Potion'
@@ -21,6 +20,7 @@ export class Potion extends Item {
             await battle.dispatch('message', `Healed ${pokemon.name} for ${healedAmount} HP.`)
             healSoundEffect()
             await updatePlayerPokemonHealth()
+            checkWhichMusicToPlay()
             await opponentTurn()
         }
 

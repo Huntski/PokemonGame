@@ -37,6 +37,10 @@ export const player = new Store({
 
         getStatusElement(state) {
             return state.statusElement
+        },
+
+        getIsDefeated(state) {
+            return state.player.allPokemonDefeated
         }
     },
 

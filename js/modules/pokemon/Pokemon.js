@@ -15,7 +15,14 @@ export class Pokemon {
     damageTaken = 0
     element = ''
 
-    constructor(level = 5) {
+    constructor({
+        level = 5,
+        health = 20,
+        damageTaken = 0
+    }) {
+        this.health = health
+        this.damageTaken = damageTaken
+
         for (let i = 1; i < level; i++) {
             this.gainLevel()
         }

@@ -1,4 +1,4 @@
-import {opponentContainer, playerContainer} from "./BattleSequence.js"
+import {opponentContainer, playerContainer, runWinSequence} from "./BattleSequence.js"
 import {showMessage} from "./Menu/MessageMenu.js"
 import {sleep} from "../../script.js"
 import {
@@ -64,8 +64,9 @@ export async function loadInOpponentPokemon(pokemon) {
     await sleep(1000)
 }
 
-export async function getPokemonBack(pokemon) {
-    pokeballOpenSoundEffect()
+export async function getPokemonBack(pokemon, sound = true) {
+    if (sound) pokeballOpenSoundEffect()
+
     await sleep(400)
 
     pokemon.element.animate([
@@ -80,6 +81,8 @@ export async function getPokemonBack(pokemon) {
 }
 
 export async function checkPlayerPokemonHealth() {
+    console.log(player.getters['getPokemon'])
+
     if (player.getters['getPokemon'].fainted) {
         console.log('PLAYER FAINTED')
         resetPlayerPokemonStatus()
@@ -88,9 +91,9 @@ export async function checkPlayerPokemonHealth() {
         await battle.dispatch('pokemonSelectMenu', false)
     } else if (player.getters['getPokemon'].isLow) {
         player.getters['getPokemon'].lowEvent()
-    } else {
-        checkWhichMusicToPlay()
     }
+
+    checkWhichMusicToPlay()
 }
 
 export async function checkOpponentPokemonHealth() {
@@ -98,7 +101,13 @@ export async function checkOpponentPokemonHealth() {
         resetOpponentPokemonStatus()
         await opponent.getters['getPokemon'].animateTakeDown()
         await showMessage(`${opponent.getters['getOpponent'].nickname}'s ${opponent.getters['getPokemon'].name} fainted!`)
-        await opponent.dispatch('throwInNewPokemon')
+        console.log(opponent.getters['getIsDefeated'])
+
+        if (opponent.getters['getIsDefeated']) {
+            await runWinSequence()
+        } else {
+            await opponent.dispatch('throwInNewPokemon')
+        }
     } else {
         await opponentTurn()
     }

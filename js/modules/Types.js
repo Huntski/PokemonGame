@@ -10,7 +10,7 @@ export default {
 
     water: {
         strong: ['ground', 'rock', 'fire'],
-        weak: ['electric', 'grass', 'fighting', 'water'],
+        weak: ['electric', 'grass', 'fighting'],
     },
 
     fire: {

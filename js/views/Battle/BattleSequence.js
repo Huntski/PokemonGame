@@ -1,9 +1,10 @@
 import {gameCanvas, resetCanvas, sleep} from "../../script.js"
-import {playBattleMusic} from "../../music.js"
+import {playBattleMusic, playWinMusic} from "../../music.js"
 import {loadInOpponentPokemon, loadInPlayerPokemon} from "./PokemonEvents.js"
 import {battle} from "../../store/battle.js"
 import {opponent} from "../../store/opponent.js"
 import {player} from "../../store/player.js"
+import {showMessage} from "./Menu/MessageMenu.js"
 
 export let battleMenu = null
 export let playerStatus = null
@@ -52,7 +53,7 @@ function CreateBattleInterface() {
 }
 
 async function startBattleSequence() {
-    const debug = false
+    const debug = true
 
     if (debug) {
         await loadInOpponentPokemon(opponent.getters['getRandomPokemon'])
@@ -86,3 +87,16 @@ async function createKeyboardEvents() {
         }
     })
 }
+
+export async function runWinSequence() {
+    playWinMusic()
+
+    await opponent.dispatch('showOpponentCharacter')
+    await opponent.dispatch('animateOpponentSlideIn')
+
+    await showMessage(`That's enough ${opponent.getters['getOpponent'].name}!`, 2000)
+
+    await showMessage('After the battle, a fresh wind blew through my heart...', 2000)
+    await showMessage('Use the battle with me as a stepping stone and move forward!', 2000)
+}
+

@@ -11,6 +11,16 @@ export class Player {
         }
     }
 
+    get allPokemonDefeated() {
+        for (let index in this.currentlyHolding) {
+            if (this.currentlyHolding[index].fainted === false) {
+                return false
+            }
+        }
+
+        return true
+    }
+
     get nickname() {
         return this.name.toUpperCase()
     }

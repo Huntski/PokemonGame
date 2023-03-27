@@ -31,6 +31,10 @@ export const opponent = new Store({
 
         getRandomPokemon(state) {
             return state.opponent.pickRandomPokemon()
+        },
+
+        getIsDefeated(state) {
+            return state.opponent.allPokemonDefeated
         }
     },
 
@@ -62,6 +66,17 @@ export const opponent = new Store({
             element.classList.add('character')
             opponentContainer.append(element)
             commit('SET_ELEMENT', element)
+        },
+
+        async animateOpponentSlideIn({getters}) {
+            getters['getElement'].animate([
+                {transform: 'translateX(80%)', opacity: 0},
+                {transform: 'translateX(0)', opacity: 1}
+            ], {
+                duration: 300,
+                easing: 'ease-in',
+                fill: "forwards"
+            }).finished
         },
 
         async hideOpponentCharacter({getters}) {

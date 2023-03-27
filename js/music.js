@@ -1,6 +1,6 @@
 import {player} from "./store/player.js"
 
-let defaultVolume = 0.5
+let defaultVolume = 0.4
 const sounds = {}
 const music = {}
 
@@ -28,6 +28,19 @@ export function playBattleMusic() {
     if (music['battleMusic'].paused) {
         stopMusic()
         music['battleMusic'].play()
+    }
+}
+
+export function playWinMusic() {
+    // https://www.youtube.com/watch?v=8D0XEvaS_rc
+    if (music['winMusic'] === undefined) {
+        music['winMusic'] = createSoundElement("sounds/y2mate.com - Pokemon Sound Effects HD.mp3")
+        music['winMusic'].setAttribute("loop", '')
+    }
+
+    if (music['winMusic'].paused) {
+        stopMusic()
+        music['winMusic'].play()
     }
 }
 

@@ -234,17 +234,32 @@ button {
     align-items: center;
     padding-top: 5px;
 }
+
 .popup-menu__footer button {
-    color: white;
+    color: black;
     font-size: 1em;
-    background: #E53428;
+    background: #ecb815;
     padding: 6px 15px;
     border-radius: 5px;
 }
 .popup-menu__footer button:hover,
 .popup-menu__footer button:focus {
-    background: #ea3f33;
+    background: #f1bf20;
 }
+
+.cancel-button {
+    color: black;
+    font-size: 1em;
+    background: #ecb815;
+    padding: 6px 15px;
+    border-radius: 5px;
+}
+.cancel-button:hover,
+.cancel-button:focus {
+    background: #f1bf20;
+}
+
+
 
 /**
     Keyframes & animations
