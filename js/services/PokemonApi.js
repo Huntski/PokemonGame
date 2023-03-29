@@ -51,8 +51,6 @@ export async function getPokemonDetails(id) {
     try {
         const result = await fetch(`${API_BASE_URL}/pokemon/${id}`).then(response => response.json())
 
-        console.log(result)
-
         const stats = {}
 
         result.stats.forEach(stat => {

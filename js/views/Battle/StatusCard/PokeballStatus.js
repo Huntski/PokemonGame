@@ -15,7 +15,6 @@ export function createPlayerStatusCard(pokemon, statusContainer) {
     card.classList.add('pokeball-status')
 
     for (const poke of pokemon) {
-        console.log(poke)
         const index = pokemon.indexOf(poke)
         const img = document.createElement('img')
         img.src = 'img/pokebal-icon.png'
