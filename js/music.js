@@ -32,7 +32,6 @@ export function playBattleMusic() {
 }
 
 export function playWinMusic() {
-    // https://www.youtube.com/watch?v=8D0XEvaS_rc
     if (music['winMusic'] === undefined) {
         music['winMusic'] = createSoundElement("sounds/winmusic.mp3")
         music['winMusic'].setAttribute("loop", '')
@@ -57,7 +56,6 @@ export function playPokemonLowMusic() {
 }
 
 export function menuSoundEffect() {
-    // Sound effect source: https://www.youtube.com/watch?v=5UHmxWsPNzg
     if (sounds['selectMenu'] === undefined) {
         sounds['selectMenu'] = createSoundElement("sounds/menu/BW2MenuSelect.wav")
     }
@@ -67,7 +65,6 @@ export function menuSoundEffect() {
 }
 
 export function healSoundEffect() {
-    // Sound effect source: https://www.youtube.com/watch?v=Dzav9wcsPP8 - at 24 seconds
     if (sounds['heal'] === undefined) {
         sounds['heal'] = createSoundElement("sounds/Heal sound effect.mp3")
     }
@@ -77,7 +74,6 @@ export function healSoundEffect() {
 }
 
 export function pokeballOpenSoundEffect() {
-    // Sound effect source: https://www.youtube.com/watch?v=Dzav9wcsPP8 - at 54 seconds
     if (sounds['heal'] === undefined) {
         sounds['heal'] = createSoundElement("sounds/Pokebal open sound .mp3")
     }
