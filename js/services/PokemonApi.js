@@ -5,7 +5,7 @@ const API_BASE_URL = 'https://pokeapi.co/api/v2'
 
 export async function getRandomPokemon() {
     // Get random PokemonId from 1 to 150
-    const randomPokemonId = Math.floor(Math.random() * (150 + 1))
+    const randomPokemonId = Math.floor(Math.random() * (150 + 1) + 1)
     const randomLevel = Math.floor(Math.random() * (40 - 30 + 1) + 30)
 
     const pokemonDetails = await getPokemonDetails(randomPokemonId)
@@ -39,7 +39,11 @@ export async function getRandomPokemon() {
         characterFromBack: pokemonDetails.spriteBack,
         characterFromFront: pokemonDetails.spriteFront,
         abilities: moves,
-        types: types
+        health: pokemonDetails.hp,
+        attack: pokemonDetails.attack,
+        defense: pokemonDetails.defense,
+        speed: pokemonDetails.speed,
+        types: types,
     })
 }
 
@@ -47,9 +51,9 @@ export async function getPokemonDetails(id) {
     try {
         const result = await fetch(`${API_BASE_URL}/pokemon/${id}`).then(response => response.json())
 
-        const stats = {}
+        console.log(result)
 
-        console.log('POKEMON', result)
+        const stats = {}
 
         result.stats.forEach(stat => {
             stats[stat.stat.name] = stat.base_stat

@@ -6,6 +6,8 @@ export class Move {
             ppUsed = 0,
             type = 'normal'
         }) {
+        if (!power) power = 40
+
         this.name = name.replace('-', ' ').toUpperCase()
         this.power = power
         this.pp = pp
@@ -31,7 +33,7 @@ export class Move {
             {transform: `translate(0)`}
         ], {
             duration: 400,
-        }).finished
+        })
     }
 
     animationFromOpponent = async (pokemon) => {

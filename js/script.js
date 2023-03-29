@@ -47,8 +47,6 @@ await opponent.commit(opponentStates.SET_OPPONENT, new Opponent({
         await getRandomPokemon(),
         await getRandomPokemon(),
         await getRandomPokemon(),
-        await getRandomPokemon(),
-        await getRandomPokemon(),
         await getRandomPokemon()
     ],
 

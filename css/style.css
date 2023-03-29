@@ -5,6 +5,7 @@
 @import 'move-animations.css';
 @import 'pokemon-menu.css';
 @import 'items-menu.css';
+@import 'status-card.css';
 
 html, body {
     height: 100vh;
@@ -144,88 +145,6 @@ button {
     color: white;
 }
 
-.status {
-    position: relative;
-    align-self: flex-start;
-    width: 40%;
-}
-
-.pokemon-status {
-    color: white;
-    background-color: #252525;
-    animation: fadeIn 300ms;
-    padding: 3%;
-    border-radius: 5px;
-}
-
-.pokemon-status:before {
-    content: '';
-    position: absolute;
-    top: 0;
-    right: 0;
-    width: 0;
-    border-top: 20px solid white;
-    border-left: 30px solid #252525;
-}
-
-.pokemon-status__name {
-    display: flex;
-    align-items: center;
-    gap: 20px;
-    margin-bottom: 5px;
-}
-
-.pokemon-status__health {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    width: 100%;
-}
-
-.pokemon-status__health span {
-    color: #FCFF5E;
-}
-
-.health-bar {
-    position: relative;
-    width: 100%;
-    background: #121212;
-    height: 10px;
-    border-radius: 50px;
-    overflow: hidden;
-}
-
-.health-bar:after {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    box-shadow: 0 0 2px black inset;
-    border-radius: inherit;
-}
-
-.current-health {
-    position: absolute;
-    z-index: 2;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    border-radius: inherit;
-    background-color: #E53428;
-    transform-origin: left;
-}
-
-.status--opponent {
-    margin-bottom: auto;
-}
-
-.status--player {
-    align-self: flex-end;
-}
-
 /**
     PopupMenu - For selecting items and pokémon.
  */
@@ -338,7 +257,7 @@ button {
 }
 
 .pokemon-low-hp {
-    animation: animatePokemonLowHP 600ms linear infinite;
+    animation: animatePokemonLowHP 600ms linear infinite !important;
 }
 
 @keyframes animatePokemonLowHP {

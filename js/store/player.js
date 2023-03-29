@@ -27,6 +27,10 @@ export const player = new Store({
             return state.element
         },
 
+        getCurrentlyHolding(state) {
+            return state.player.currentlyHolding
+        },
+
         getFirstPokemon(state) {
             return state.player.currentlyHolding[0]
         },

@@ -5,6 +5,8 @@ import {battle} from "../../store/battle.js"
 import {opponent} from "../../store/opponent.js"
 import {player} from "../../store/player.js"
 import {showMessage} from "./Menu/MessageMenu.js"
+import {showOpponentStatus, showPlayerStatus} from "./StatusCard/PokeballStatus.js"
+import {resetOpponentPokemonStatus, resetPlayerPokemonStatus} from "./StatusCard/PokemonStatus.js"
 
 export let battleMenu = null
 export let playerStatus = null
@@ -53,7 +55,7 @@ function CreateBattleInterface() {
 }
 
 async function startBattleSequence() {
-    const debug = true
+    const debug = false
 
     if (debug) {
         await loadInOpponentPokemon(opponent.getters['getRandomPokemon'])
@@ -70,11 +72,17 @@ async function startBattleSequence() {
 
     await sleep(1000)
 
+    showOpponentStatus()
+
     await battle.dispatch('message', `You have been challenged by <br>Trainer ${opponent.getters['getOpponent'].name}`)
     await opponent.dispatch('hideOpponentCharacter')
+
     await loadInOpponentPokemon(opponent.getters['getRandomPokemon'])
 
+    showPlayerStatus()
+
     await player.dispatch('hidePlayerCharacter')
+
     await loadInPlayerPokemon(player.getters['getFirstPokemon'])
 
     await battle.dispatch('startMenu')

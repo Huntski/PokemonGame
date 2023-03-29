@@ -12,11 +12,14 @@ import {checkWhichMusicToPlay, pokeballOpenSoundEffect} from "../../music.js"
 import {opponent, opponentStates} from "../../store/opponent.js"
 import {player, playerStates} from "../../store/player.js"
 import {battle} from "../../store/battle.js"
+import {showOpponentStatus} from "./StatusCard/PokeballStatus.js"
 
 export async function loadInPlayerPokemon(pokemon) {
     playerContainer.innerHTML = ''
 
     await showMessage(`You send in <br>${pokemon.name}!`)
+
+    resetPlayerPokemonStatus()
 
     await player.commit(playerStates.SET_POKEMON, pokemon)
 
@@ -43,6 +46,8 @@ export async function loadInOpponentPokemon(pokemon) {
     opponentContainer.innerHTML = ''
 
     await showMessage(`Rival ${opponent.getters['getOpponent'].name} send in <br>${pokemon.name}!`)
+
+    resetOpponentPokemonStatus()
 
     const pokemonElement = document.createElement('img')
     pokemonElement.src = pokemon.characterFromFront
@@ -101,6 +106,7 @@ export async function checkOpponentPokemonHealth() {
         if (opponent.getters['getIsDefeated']) {
             await runWinSequence()
         } else {
+            showOpponentStatus()
             await opponent.dispatch('throwInNewPokemon')
         }
     } else {

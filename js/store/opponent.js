@@ -29,6 +29,10 @@ export const opponent = new Store({
             return state.element
         },
 
+        getCurrentlyHolding(state) {
+            return state.opponent.currentlyHolding
+        },
+
         getRandomPokemon(state) {
             return state.opponent.pickRandomPokemon()
         },

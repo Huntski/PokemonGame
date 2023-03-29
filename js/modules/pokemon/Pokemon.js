@@ -139,10 +139,7 @@ export class Pokemon {
             this.damageTaken = 0
         }
 
-        if (this.isLow) {
-            this.element.classList.remove('pokemon-low-hp')
-            playBattleMusic()
-        }
+        this.element.classList.remove('pokemon-low-hp')
 
         return this.currentHealth - healthBeforeHeal
     }
