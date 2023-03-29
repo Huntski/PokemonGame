@@ -1,13 +1,16 @@
 export class Move {
-    name = null
-    damage = null
-    animation = null
-    pp = 20 // Also stands for: "Power Point"
-    ppUsed = 0
-    type = 'normal'
-
-    getMoveDamage(level) {
-        return this.damage * (level / 2)
+    constructor({
+            name = "",
+            power = 0,
+            pp = 20,
+            ppUsed = 0,
+            type = 'normal'
+        }) {
+        this.name = name.replace('-', ' ').toUpperCase()
+        this.power = power
+        this.pp = pp
+        this.ppUsed = ppUsed
+        this.type = type
     }
 
     useMove() {
@@ -18,5 +21,27 @@ export class Move {
 
     get currentPP() {
         return this.pp - this.ppUsed
+    }
+
+    animation = async (pokemon) => {
+        await pokemon.element.animate([
+            {transform: `translate(0)`},
+            {transform: `translate(-40px)`},
+            {transform: `translate(50px)`},
+            {transform: `translate(0)`}
+        ], {
+            duration: 400,
+        }).finished
+    }
+
+    animationFromOpponent = async (pokemon) => {
+        await pokemon.element.animate([
+            {transform: `translate(0)`},
+            {transform: `translate(40px)`},
+            {transform: `translate(-50px)`},
+            {transform: `translate(0)`}
+        ], {
+            duration: 400,
+        }).finished
     }
 }

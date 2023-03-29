@@ -55,5 +55,5 @@ export function showFightMenu() {
 function updateStatusElement(ability, element) {
     element.innerHTML = `
         <p>${ability.currentPP}/${ability.pp}</p>
-        <p>${ability.type}</p>`
+        <p>${ability.type.toUpperCase()}</p>`
 }

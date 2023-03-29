@@ -4,7 +4,7 @@ export class Player {
         this.currentlyHolding = []
         this.items = items
         this.imageSrc = picture
-        this.name = name
+        this.name = name.toUpperCase()
 
         for (let i = 0; i < 6 && i < this.pokemon.length; i++) {
             this.currentlyHolding.push(this.pokemon[i])
@@ -19,10 +19,6 @@ export class Player {
         }
 
         return true
-    }
-
-    get nickname() {
-        return this.name.toUpperCase()
     }
 }
 

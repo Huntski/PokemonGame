@@ -67,9 +67,10 @@ async function startBattleSequence() {
 
     await player.dispatch('showPlayerCharacter')
     await opponent.dispatch('showOpponentCharacter')
+
     await sleep(1000)
 
-    await battle.dispatch('message', `You have been challenged by <br>Trainer ${opponent.getters['getOpponent'].nickname}`)
+    await battle.dispatch('message', `You have been challenged by <br>Trainer ${opponent.getters['getOpponent'].name}`)
     await opponent.dispatch('hideOpponentCharacter')
     await loadInOpponentPokemon(opponent.getters['getRandomPokemon'])
 

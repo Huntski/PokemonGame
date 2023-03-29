@@ -16,14 +16,13 @@ export class Potion extends Item {
             await battle.dispatch('message', `${pokemon.name} is already full health.`)
             await battle.dispatch('startMenu')
         } else {
-            const healedAmount = pokemon.heal(this.healAmount)
+            const healedAmount = Math.floor(pokemon.heal(this.healAmount))
             await battle.dispatch('message', `Healed ${pokemon.name} for ${healedAmount} HP.`)
+            this.removeAmount()
             healSoundEffect()
             await updatePlayerPokemonHealth()
             checkWhichMusicToPlay()
             await opponentTurn()
         }
-
-        this.removeAmount()
     }
 }

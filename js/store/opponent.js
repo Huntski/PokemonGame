@@ -55,12 +55,14 @@ export const opponent = new Store({
     actions: {
         async throwInNewPokemon({getters}) {
             const newPokemon = getters['getRandomPokemon']
-            await showMessage(`Rival ${getters['getOpponent'].nickname} is <br>about to send in ${newPokemon.name}`)
+            await showMessage(`Rival ${getters['getOpponent'].name} is <br>about to send in ${newPokemon.name}`)
             await loadInOpponentPokemon(newPokemon)
             await playerTurn()
         },
 
         async showOpponentCharacter({commit, getters}) {
+            opponentContainer.innerHTML = ''
+
             const element = document.createElement('img')
             element.src = getters['getOpponent'].imageSrc
             element.classList.add('character')
@@ -73,14 +75,14 @@ export const opponent = new Store({
                 {transform: 'translateX(80%)', opacity: 0},
                 {transform: 'translateX(0)', opacity: 1}
             ], {
-                duration: 300,
+                duration: 500,
                 easing: 'ease-in',
                 fill: "forwards"
             }).finished
         },
 
         async hideOpponentCharacter({getters}) {
-            return getters['getElement'].animate([
+            await getters['getElement'].animate([
                 {transform: 'translateX(0)', opacity: 1},
                 {transform: 'translateX(100px)', opacity: 0}
             ], {

@@ -1,4 +1,4 @@
-import {playerContainer} from "../views/Battle/BattleSequence.js"
+import {opponentContainer, playerContainer} from "../views/Battle/BattleSequence.js"
 import Store from "../modules/Store.js"
 
 /**
@@ -74,9 +74,7 @@ export const player = new Store({
         },
 
         async hidePlayerCharacter({getters}) {
-            console.log(getters)
-
-            return getters['getElement'].animate([
+            await getters['getElement'].animate([
                 {transform: 'translateX(0)', opacity: 1},
                 {transform: 'translateX(-100px)', opacity: 0}
             ], {

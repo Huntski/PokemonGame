@@ -4,32 +4,53 @@ import {sleep} from "../../script.js"
 
 export class Pokemon {
     id = generateId()
-    abilities = []
-    level = 1
-    health = 20
-    name = ''
-    type = 'normal'
-    characterFromBack = ''
-    characterFromFront = ''
-    cryFileSrc = ''
-    damageTaken = 0
-    element = ''
 
     constructor({
-        level = 5,
+        id = 0,
+        level = 0,
         health = 20,
-        damageTaken = 0
-    }) {
-        this.health = health
-        this.damageTaken = damageTaken
+        abilities =  [],
+        name =  '',
+        types =  ['normal'],
+        characterFromBack =  '',
+        characterFromFront =  '',
+        damageTaken =  0,
+        element =  '',
 
-        for (let i = 1; i < level; i++) {
-            this.gainLevel()
+        defense = 0,
+        attack = 0,
+        speed = 0,
+    }) {
+        this.id = id
+        this.level = 0
+        this.health = health
+        this.abilities = abilities
+        this.name = name.replace('-', ' ').toUpperCase()
+        this.types = types
+        this.characterFromBack = characterFromBack
+        this.characterFromFront = characterFromFront
+        this.damageTaken = damageTaken
+        this.element = element
+
+        this.defense = defense
+        this.attack = attack
+        this.speed = speed
+
+        this.originalHealth = health
+
+        for (let i = 0; i < level; i++) {
+            this.level++
+            this.health += this.originalHealth * 0.05
         }
     }
 
     cry() {
-        pokemonCry(this.cryFileSrc)
+        // The use of pad: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/padStart
+        const idWithPadding = String(this.id).padStart(3, '0')
+        const pokemonName = this.name.charAt(0).toUpperCase() + this.name.slice(1).toLowerCase()
+        const fileName = `${idWithPadding} - ${pokemonName}.wav`
+
+        pokemonCry(fileName)
     }
 
     setPokemonElement(element) {
@@ -37,8 +58,7 @@ export class Pokemon {
     }
 
     gainLevel() {
-        this.level++
-        this.health += 20
+        this.health += this.originalHealth * 0.05
     }
 
     learnAbility(ability) {

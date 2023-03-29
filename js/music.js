@@ -1,6 +1,6 @@
 import {player} from "./store/player.js"
 
-let defaultVolume = 0.4
+let defaultVolume = 0.01
 const sounds = {}
 const music = {}
 
@@ -94,11 +94,13 @@ export function takeDamageSoundEffect() {
     sounds['takeDamage'].play()
 }
 
-export function pokemonCry(src) {
+export function pokemonCry(fileName) {
+    const path = `sounds/cries/${fileName}`
+
     if (sounds['cry'] === undefined) {
-        sounds['cry'] = createSoundElement(src)
+        sounds['cry'] = createSoundElement(path)
     } else {
-        sounds['cry'].src = src
+        sounds['cry'].src = path
     }
 
     sounds['cry'].play()
@@ -110,12 +112,8 @@ export function pokemonCry(src) {
  * @returns {HTMLAudioElement}
  */
 function createSoundElement(audioSrc) {
-    const audioElement = document.createElement("audio")
-
-    audioElement.src = audioSrc
+    const audioElement = new Audio(audioSrc)
     audioElement.setAttribute("preload", "auto")
-    audioElement.setAttribute("controls", "none")
-    audioElement.style.display = "none"
     audioElement.volume = defaultVolume
     document.body.appendChild(audioElement)
 

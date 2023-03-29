@@ -31,7 +31,7 @@ export default function createPokemonOption(pokemon, cancelable = true) {
                 </div>
             </div>
             
-            <span class="health-indicator">${pokemon.currentHealth}/${pokemon.health}</span>
+            <span class="health-indicator">${Math.round(pokemon.currentHealth)}/${pokemon.health}</span>
         </div>`
 
     const healthBar = option.querySelector('.current-health')

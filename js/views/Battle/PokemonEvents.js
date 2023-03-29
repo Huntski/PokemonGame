@@ -42,7 +42,7 @@ export async function loadInPlayerPokemon(pokemon) {
 export async function loadInOpponentPokemon(pokemon) {
     opponentContainer.innerHTML = ''
 
-    await showMessage(`Rival ${opponent.getters['getOpponent'].nickname} send in <br>${pokemon.name}!`)
+    await showMessage(`Rival ${opponent.getters['getOpponent'].name} send in <br>${pokemon.name}!`)
 
     const pokemonElement = document.createElement('img')
     pokemonElement.src = pokemon.characterFromFront
@@ -81,13 +81,10 @@ export async function getPokemonBack(pokemon, sound = true) {
 }
 
 export async function checkPlayerPokemonHealth() {
-    console.log(player.getters['getPokemon'])
-
     if (player.getters['getPokemon'].fainted) {
-        console.log('PLAYER FAINTED')
         resetPlayerPokemonStatus()
         await player.getters['getPokemon'].animateTakeDown()
-        await showMessage(`${player.getters['getPlayer'].nickname}'s ${player.getters['getPokemon'].name} fainted!`)
+        await showMessage(`${player.getters['getPlayer'].name}'s ${player.getters['getPokemon'].name} fainted!`)
         await battle.dispatch('pokemonSelectMenu', false)
     } else if (player.getters['getPokemon'].isLow) {
         player.getters['getPokemon'].lowEvent()
@@ -100,9 +97,7 @@ export async function checkOpponentPokemonHealth() {
     if (opponent.getters['getPokemon'].fainted) {
         resetOpponentPokemonStatus()
         await opponent.getters['getPokemon'].animateTakeDown()
-        await showMessage(`${opponent.getters['getOpponent'].nickname}'s ${opponent.getters['getPokemon'].name} fainted!`)
-        console.log(opponent.getters['getIsDefeated'])
-
+        await showMessage(`${opponent.getters['getOpponent'].name}'s ${opponent.getters['getPokemon'].name} fainted!`)
         if (opponent.getters['getIsDefeated']) {
             await runWinSequence()
         } else {

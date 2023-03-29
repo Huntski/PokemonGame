@@ -16,7 +16,6 @@ export default function showItemsMenu(cancelable = true) {
     const itemOptions = itemsMenu.querySelector('.item-options')
 
     const items = player.getters['getItems']
-    console.log(items)
 
     items.forEach(item => {
         if (item.amount > 0) itemOptions.append(createItemOption(item))

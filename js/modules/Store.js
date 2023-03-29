@@ -19,8 +19,6 @@ class Store {
      * @returns {Promise<void>}
      */
     async commit(MUTATION, params = {}) {
-        console.log(MUTATION, params)
-
         try {
             await this.beforeMutation(MUTATION, params)
 
@@ -36,8 +34,6 @@ class Store {
         for (let getter in this.GetterTree) {
             getters[getter] = this.GetterTree[getter](this.StateTree)
         }
-
-        console.log(getters)
 
         return getters
     }
