@@ -98,6 +98,8 @@ async function createKeyboardEvents() {
 }
 
 export async function runWinSequence() {
+    player.getters['getPokemon'].removeLowHpAnimation()
+
     playWinMusic()
 
     await opponent.dispatch('showOpponentCharacter')

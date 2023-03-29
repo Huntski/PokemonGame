@@ -6,7 +6,7 @@ import {opponent, opponentStates} from "./store/opponent.js"
 import {SuperPotion} from "./modules/items/potions/SuperPotion.js"
 import {getRandomPokemon} from "./services/PokemonApi.js"
 import {Potion} from "./modules/items/potions/Potion.js"
-import {hideSpinner} from "./views/Battle/LoadingSpinner.js"
+import {hideSpinner} from "./views/Battle/Loading.js"
 
 export const gameCanvas = document.querySelector('#game-canvas')
 

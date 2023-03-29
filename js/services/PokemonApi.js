@@ -1,5 +1,6 @@
 import {Pokemon} from "../modules/pokemon/Pokemon.js"
 import {Move} from "../modules/moves/Move.js"
+import {addRequest} from "../views/Battle/Loading.js"
 
 const API_BASE_URL = 'https://pokeapi.co/api/v2'
 
@@ -9,6 +10,8 @@ export async function getRandomPokemon() {
     const randomLevel = Math.floor(Math.random() * (40 - 30 + 1) + 30)
 
     const pokemonDetails = await getPokemonDetails(randomPokemonId)
+
+    addRequest()
 
     const types = []
 

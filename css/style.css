@@ -42,8 +42,34 @@ button {
     bottom: 0;
     margin: auto;
     width: 10%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.loading-bar {
+    position: relative;
+    margin-top: 30px;
+    border-radius: 20px;
+    height: 10px;
+    width: 200px;
+    background: lightblue;
+}
+
+.loading-bar .current-percentage {
+    width: 5%;
+    height: 100%;
+    background: #DEB84C;
+    border-radius: inherit;
+    transition: width 300ms ease;
+}
+
+.loading img {
     animation: spin 800ms linear infinite;
 }
+
+/* Pokemon containers */
 
 .player-container {
     position: absolute;

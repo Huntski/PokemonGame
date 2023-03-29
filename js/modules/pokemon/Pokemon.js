@@ -125,6 +125,10 @@ export class Pokemon {
         this.element.classList.add('pokemon-low-hp')
     }
 
+    removeLowHpAnimation() {
+        this.element.classList.remove('pokemon-low-hp')
+    }
+
     /**
      * Heal Pokémon.
      * @param healAmount
@@ -139,7 +143,7 @@ export class Pokemon {
             this.damageTaken = 0
         }
 
-        this.element.classList.remove('pokemon-low-hp')
+        this.removeLowHpAnimation()
 
         return this.currentHealth - healthBeforeHeal
     }
