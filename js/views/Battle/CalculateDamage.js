@@ -14,7 +14,7 @@ export function calculateDamage(attackingPokemon, targetedPokemon, ability) {
     for (let i = 0; i < targetedPokemon.types.length; i++) {
         if (Types[targetedPokemon.types[i]].weak.includes(ability.type)) {
             // Increase the damage if the targeted Pokémon is weak against the ability's type.
-            damage = damage * 1.5
+            damage = damage * 2
             message = 'It\'s super effective!'
         } else if (Types[targetedPokemon.types[i]].strong.includes(ability.type)) {
             // Half the damage if the targeted Pokémon is strong against the ability's type.
